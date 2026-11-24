@@ -24,7 +24,15 @@
   const tabs = Array.from(document.querySelectorAll(".niche-tab"));
   const tabPill = document.getElementById("tab-active-pill");
   const videosPanel = document.getElementById("niche-videos-panel");
+  const videosGrid = document.getElementById("videos-grid");
   const videoCards = Array.from(document.querySelectorAll("[data-niche-item]"));
+  const videosCarouselFooter = document.getElementById("videos-carousel-footer");
+  const videosCarouselDots = document.getElementById("videos-carousel-dots");
+  const casesGrid = document.querySelector(".cases-grid");
+  const caseCards = casesGrid
+    ? Array.from(casesGrid.querySelectorAll(".case-card"))
+    : [];
+  const casesCarouselDots = document.getElementById("cases-carousel-dots");
   const portfolioIframes = Array.from(
     document.querySelectorAll(".video-frame iframe")
   );
@@ -273,7 +281,124 @@
     });
   }
 
+  const isRealIOSWebKit =
+    typeof CSS !== "undefined" &&
+    typeof CSS.supports === "function" &&
+    CSS.supports("-webkit-touch-callout", "none");
+
+  const IOS_MP4_DRIVE_IDS = new Set([
+    "1PnoAiXySj3dY8HMFupdxcYztP3kptIjw",
+    "1r4aCL6WBrDi7XMvED-MoDk2MIi-V1BvP",
+    "1nPGnNssHsxzx8j29if6EIeFgbc2DEJfA",
+    "1u64vbYn8zpbOXOaLIg0Uvijd_p8fqI3m",
+    "10ioE7z6ZX2DEGBThsPJPwLaQqB6yIvZL",
+    "1nKjXGumw3iZnGsNr1BE0aDMpxIAbZGl0",
+    "15raKfXvzDtvoNbS29Av7Y96NMj0B6bNk",
+    "1T53WaxCRZsUVsZh0E-z0X6pG_mNhRpyB",
+    "1RvlLOSiq-ooYWJXsxZXLRrTLqYDLpd0n",
+    "1IcjD2Svtwss7vxRor8BX2KTeeA94VMiC",
+    "1VSgm7pBBb9F-XCsAjhEkYGvJrzDx8pQu"
+  ]);
+
+  function extractDriveFileId(url) {
+    if (!url) return null;
+    const match = url.match(/\/file\/d\/([^/]+)/);
+    return match ? match[1] : null;
+  }
+
+  function pauseAllNativeVideos(exceptVideo = null) {
+    document
+      .querySelectorAll("[data-case-video], .portfolio-native-video")
+      .forEach((vid) => {
+        if (vid !== exceptVideo && !vid.paused) {
+          vid.pause();
+        }
+      });
+  }
+
+  function buildIOSPosterLink(fileId, titleText) {
+    const link = document.createElement("a");
+    link.href = `https://drive.google.com/file/d/${fileId}/view`;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.className = "ios-drive-poster-link";
+    link.setAttribute("aria-label", titleText || "Assistir vídeo");
+
+    const img = document.createElement("img");
+    img.src = `https://lh3.googleusercontent.com/d/${fileId}=w720`;
+    img.alt = titleText || "";
+    img.loading = "lazy";
+    img.className = "ios-drive-poster-img";
+
+    const badge = document.createElement("span");
+    badge.className = "ios-drive-play-badge";
+    badge.setAttribute("aria-hidden", "true");
+    badge.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5L8 5.5z"/></svg>';
+
+    link.appendChild(img);
+    link.appendChild(badge);
+    return link;
+  }
+
+  function hydrateVisiblePortfolioMedia() {
+    videoCards.forEach((card) => {
+      if (card.hidden) return;
+      const frame = card.querySelector(".video-frame");
+      if (!frame || frame.dataset.hydrated === "1") return;
+      const iframe = frame.querySelector("iframe");
+      if (!iframe) return;
+
+      const previewUrl =
+        iframe.getAttribute("src") || iframe.getAttribute("data-src") || "";
+      const fileId = extractDriveFileId(previewUrl);
+
+      if (isRealIOSWebKit && fileId) {
+        frame.dataset.hydrated = "1";
+        const titleText = iframe.getAttribute("title") || "Vídeo UGC";
+        iframe.remove();
+
+        if (IOS_MP4_DRIVE_IDS.has(fileId)) {
+          const vid = document.createElement("video");
+          vid.className = "portfolio-native-video";
+          vid.controls = true;
+          vid.playsInline = true;
+          vid.setAttribute("playsinline", "");
+          vid.preload = "metadata";
+          vid.poster = `https://lh3.googleusercontent.com/d/${fileId}=w720`;
+          vid.src = `https://drive.usercontent.google.com/download?id=${fileId}&export=download&confirm=t`;
+          vid.setAttribute("aria-label", titleText);
+
+          vid.addEventListener("play", () => {
+            pauseAllNativeVideos(vid);
+            stopInteractedIframes();
+          });
+
+          vid.addEventListener("error", () => {
+            vid.replaceWith(buildIOSPosterLink(fileId, titleText));
+          });
+
+          frame.appendChild(vid);
+        } else {
+          frame.appendChild(buildIOSPosterLink(fileId, titleText));
+        }
+        return;
+      }
+
+      if (!iframe.getAttribute("src") && previewUrl) {
+        iframe.setAttribute("src", previewUrl);
+      }
+      frame.dataset.hydrated = "1";
+    });
+  }
+
   function stopInteractedIframes(excludeNiche = null) {
+    document.querySelectorAll(".portfolio-native-video").forEach((vid) => {
+      const card = vid.closest("[data-niche-item]");
+      if (card && card.getAttribute("data-niche-item") === excludeNiche) return;
+      if (!vid.paused) vid.pause();
+    });
+
     portfolioIframes.forEach((iframe) => {
       if (!interactedIframes.has(iframe)) return;
       const card = iframe.closest("[data-niche-item]");
@@ -309,9 +434,134 @@
       card.hidden = !matches;
     });
 
+    hydrateVisiblePortfolioMedia();
+    syncVideosCarousel(true);
     updateTabIndicator();
     if (scrollTab) centerTabInScrollShell(nextTab);
     if (focusTab) nextTab.focus();
+  }
+
+  /* Mobile Horizontal Snap Carousel Helpers (#cases & #videos-grid) */
+  function scrollCarouselToCard(track, card) {
+    if (!track || !card) return;
+    const align = window.getComputedStyle(card).scrollSnapAlign;
+    const targetLeft =
+      align === "start"
+        ? card.offsetLeft - 18
+        : card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+    track.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: prefersReducedMotion ? "auto" : "smooth"
+    });
+  }
+
+  function updateActiveCarouselDot(track, items, dotsContainer) {
+    if (!track || !dotsContainer || items.length === 0) return;
+    const dots = Array.from(dotsContainer.querySelectorAll(".carousel-dot"));
+    if (dots.length === 0) return;
+
+    const trackRect = track.getBoundingClientRect();
+    const trackCenter = trackRect.left + trackRect.width / 2;
+    let closestIdx = 0;
+    let minDistance = Infinity;
+
+    items.forEach((item, idx) => {
+      const rect = item.getBoundingClientRect();
+      const dist = Math.abs(rect.left + rect.width / 2 - trackCenter);
+      if (dist < minDistance) {
+        minDistance = dist;
+        closestIdx = idx;
+      }
+    });
+
+    dots.forEach((dot, idx) => {
+      const isSelected = idx === closestIdx;
+      dot.classList.toggle("is-active", isSelected);
+      dot.setAttribute("aria-current", String(isSelected));
+    });
+  }
+
+  function getVisibleVideoCards() {
+    return videoCards.filter((card) => !card.hidden);
+  }
+
+  function syncVideosCarousel(resetScroll = false) {
+    const visibleCards = getVisibleVideoCards();
+    const isSingle = visibleCards.length <= 1;
+
+    if (videosGrid) {
+      videosGrid.classList.toggle("is-single-video", isSingle);
+      if (resetScroll) {
+        videosGrid.scrollTo({ left: 0, behavior: "auto" });
+      }
+    }
+
+    if (videosCarouselFooter) {
+      videosCarouselFooter.hidden = isSingle;
+    }
+
+    if (!videosCarouselDots || isSingle) return;
+
+    videosCarouselDots.innerHTML = "";
+    visibleCards.forEach((card, idx) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = idx === 0 ? "carousel-dot is-active" : "carousel-dot";
+      btn.setAttribute("data-carousel-index", String(idx));
+      btn.setAttribute("aria-current", idx === 0 ? "true" : "false");
+      const labelPt = `Vídeo ${idx + 1}`;
+      const labelEn = `Video ${idx + 1}`;
+      btn.setAttribute("data-aria-pt", labelPt);
+      btn.setAttribute("data-aria-en", labelEn);
+      btn.setAttribute("aria-label", currentLang === "en" ? labelEn : labelPt);
+      btn.addEventListener("click", () => {
+        scrollCarouselToCard(videosGrid, card);
+      });
+      videosCarouselDots.appendChild(btn);
+    });
+  }
+
+  if (casesGrid && casesCarouselDots && caseCards.length > 0) {
+    let casesScrollRaf = 0;
+    casesGrid.addEventListener(
+      "scroll",
+      () => {
+        if (casesScrollRaf) return;
+        casesScrollRaf = requestAnimationFrame(() => {
+          casesScrollRaf = 0;
+          updateActiveCarouselDot(casesGrid, caseCards, casesCarouselDots);
+        });
+      },
+      { passive: true }
+    );
+
+    Array.from(casesCarouselDots.querySelectorAll(".carousel-dot")).forEach(
+      (dot, idx) => {
+        dot.setAttribute("aria-current", idx === 0 ? "true" : "false");
+        dot.addEventListener("click", () => {
+          scrollCarouselToCard(casesGrid, caseCards[idx]);
+        });
+      }
+    );
+  }
+
+  if (videosGrid && videosCarouselDots) {
+    let videosScrollRaf = 0;
+    videosGrid.addEventListener(
+      "scroll",
+      () => {
+        if (videosScrollRaf) return;
+        videosScrollRaf = requestAnimationFrame(() => {
+          videosScrollRaf = 0;
+          updateActiveCarouselDot(
+            videosGrid,
+            getVisibleVideoCards(),
+            videosCarouselDots
+          );
+        });
+      },
+      { passive: true }
+    );
   }
 
   tabs.forEach((tab, index) => {
@@ -353,9 +603,7 @@
     const active = document.activeElement;
     if (active && active.tagName === "IFRAME") {
       interactedIframes.add(active);
-      document.querySelectorAll("[data-case-video]").forEach((v) => {
-        if (!v.paused) v.pause();
-      });
+      pauseAllNativeVideos();
     }
   });
 
@@ -420,11 +668,7 @@
 
   caseVideos.forEach((vid) => {
     vid.addEventListener("play", () => {
-      caseVideos.forEach((other) => {
-        if (other !== vid && !other.paused) {
-          other.pause();
-        }
-      });
+      pauseAllNativeVideos(vid);
       stopInteractedIframes();
     });
   });
@@ -485,7 +729,7 @@
     coverflowDots.forEach((dot, idx) => {
       const isSelected = idx === activeSlideIndex;
       dot.classList.toggle("is-active", isSelected);
-      dot.setAttribute("aria-selected", String(isSelected));
+      dot.setAttribute("aria-current", String(isSelected));
     });
   }
 
@@ -637,48 +881,8 @@
   }
 
   /* ==========================================================================
-     9. 21st.dev CLOSING MONOLITH — COPY EMAIL, GLASS SPOTLIGHT & WORDMARK GLOW
+     9. 21st.dev CLOSING MONOLITH — GLASS SPOTLIGHT & WORDMARK GLOW
      ========================================================================== */
-  const copyEmailBtn = document.getElementById("copy-email-btn");
-  let copyResetTimer = null;
-
-  function fallbackCopyText(text) {
-    const tempArea = document.createElement("textarea");
-    tempArea.value = text;
-    tempArea.setAttribute("readonly", "");
-    tempArea.style.position = "fixed";
-    tempArea.style.opacity = "0";
-    tempArea.style.pointerEvents = "none";
-    document.body.appendChild(tempArea);
-    tempArea.select();
-    try {
-      document.execCommand("copy");
-    } catch (_) {
-      /* Ignore clipboard restrictions */
-    }
-    document.body.removeChild(tempArea);
-  }
-
-  if (copyEmailBtn) {
-    copyEmailBtn.addEventListener("click", () => {
-      const email =
-        copyEmailBtn.getAttribute("data-email") ||
-        "sarahvercosamartins@gmail.com";
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(email).catch(() => fallbackCopyText(email));
-      } else {
-        fallbackCopyText(email);
-      }
-
-      copyEmailBtn.classList.add("is-copied");
-      if (copyResetTimer) window.clearTimeout(copyResetTimer);
-      copyResetTimer = window.setTimeout(() => {
-        copyEmailBtn.classList.remove("is-copied");
-      }, 2200);
-    });
-  }
-
   // 21st.dev Spotlight Cards: track cursor coordinates inside each channel card
   if (!prefersReducedMotion) {
     const glassChannelCards = Array.from(
@@ -723,6 +927,8 @@
   /* ==========================================================================
      10. INITIALIZE
      ========================================================================== */
+  hydrateVisiblePortfolioMedia();
+  syncVideosCarousel(false);
   applyLanguage(getInitialLanguage());
   updateTabIndicator();
 })();
