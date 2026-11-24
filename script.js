@@ -73,6 +73,10 @@
       span.setAttribute("aria-hidden", "true");
       span.style.setProperty("--tr-i", i);
       span.textContent = word;
+      const hlWord = (el.getAttribute("data-hl-" + currentLang) || "").toLowerCase();
+      if (hlWord && word.toLowerCase().replace(/[.,!?;:]/g, "") === hlWord) {
+        span.classList.add("hl-word");
+      }
       el.appendChild(span);
       if (i < arr.length - 1) el.appendChild(document.createTextNode(" "));
     });
@@ -631,9 +635,10 @@
       const eased = 1 - Math.pow(1 - progress, 3);
       const currentVal = target * eased;
       const suffix = el.getAttribute(`data-suffix-${currentLang}`) || "";
+      const prefix = el.getAttribute(`data-prefix-${currentLang}`) ?? el.getAttribute("data-prefix") ?? "";
 
       if (progress < 1) {
-        el.textContent = `${formatCounterNumber(currentVal, decimals, currentLang)}${suffix}`;
+        el.textContent = `${prefix}${formatCounterNumber(currentVal, decimals, currentLang)}${suffix}`;
         requestAnimationFrame(tick);
       } else {
         delete el.dataset.ticking;
