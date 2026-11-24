@@ -48,11 +48,52 @@
   handleHeaderScroll();
 
   /* ==========================================================================
+     2B. 21st.dev TEXT REVEAL (@cnippet-dev) — word-by-word fade-in-blur
+     ========================================================================== */
+  const textRevealTargets = Array.from(
+    document.querySelectorAll(".section-title, .contact-title")
+  );
+  textRevealTargets.forEach((el) => el.setAttribute("data-text-reveal", ""));
+
+  function splitTextReveal(el) {
+    const text = el.textContent.trim().replace(/\s+/g, " ");
+    el.setAttribute("aria-label", text);
+    el.textContent = "";
+    text.split(" ").forEach((word, i, arr) => {
+      const span = document.createElement("span");
+      span.className = "tr-word";
+      span.setAttribute("aria-hidden", "true");
+      span.style.setProperty("--tr-i", i);
+      span.textContent = word;
+      el.appendChild(span);
+      if (i < arr.length - 1) el.appendChild(document.createTextNode(" "));
+    });
+  }
+
+  textRevealTargets.forEach(splitTextReveal);
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    textRevealTargets.forEach((el) => el.classList.add("is-revealed"));
+  } else {
+    const textRevealObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-revealed");
+          obs.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.2 }
+    );
+    textRevealTargets.forEach((el) => textRevealObserver.observe(el));
+  }
+
+  /* ==========================================================================
      3. BILINGUAL SWITCHER (PT | EN) — INSTANT & ZERO RELOAD
      ========================================================================== */
   const PAGE_TITLES = {
-    pt: "Sarah Martins (@sahvm) — Portfólio UGC Creator",
-    en: "Sarah Martins (@sahvm) — UGC Creator Portfolio"
+    pt: "Sarah Verçosa (@sahvm) — Portfólio UGC Creator",
+    en: "Sarah Verçosa (@sahvm) — UGC Creator Portfolio"
   };
 
   function getInitialLanguage() {
@@ -88,6 +129,8 @@
         el.textContent = nextText;
       }
     });
+
+    document.querySelectorAll("[data-text-reveal]").forEach(splitTextReveal);
 
     document.querySelectorAll("[data-alt-pt][data-alt-en]").forEach((img) => {
       const nextAlt = img.getAttribute(`data-alt-${currentLang}`);
