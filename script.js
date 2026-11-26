@@ -95,7 +95,7 @@
           obs.unobserve(entry.target);
         });
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.2 }
+      { rootMargin: "140px 0px 80px 0px", threshold: 0.01 }
     );
     textRevealTargets.forEach((el) => textRevealObserver.observe(el));
   }
@@ -180,6 +180,8 @@
     }
 
     requestAnimationFrame(updateTabIndicator);
+    if (typeof renderShowcaseItem === "function") renderShowcaseItem(showcaseIdx);
+    if (typeof startTypingNote === "function") startTypingNote(noteIdx);
   }
 
   if (langToggle) {
@@ -696,6 +698,11 @@
     }
   }
 
+  // Fotos da seção de Marcas (#marcas) abrem no mesmo lightbox
+  document.querySelectorAll(".brand-photo-btn[data-lightbox-src]").forEach((btn) => {
+    btn.addEventListener("click", () => openPhotoLightbox(btn));
+  });
+
   // 21st.dev 3D Coverflow Carousel Logic
   const coverflowRoot = document.getElementById("product-coverflow");
   const coverflowStage = document.getElementById("coverflow-stage");
@@ -879,7 +886,7 @@
           }
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+      { rootMargin: "120px 0px 80px 0px", threshold: 0.01 }
     );
 
     revealItems.forEach((el) => revealObserver.observe(el));
@@ -930,7 +937,265 @@
   }
 
   /* ==========================================================================
-     10. INITIALIZE
+     10. iOS FLUID SCROLL DOCKING (21st.dev Container Scroll + Cards Stack)
+     ========================================================================== */
+  if (!prefersReducedMotion) {
+    const heroSection = document.querySelector(".hero-section");
+    const scrollStages = Array.from(document.querySelectorAll("[data-scroll-stage]"));
+    const stackCards = Array.from(document.querySelectorAll("[data-stack-card]"));
+    const fitTargets = Array.from(
+      document.querySelectorAll(
+        ".creator-dna-band, .brands-more, .sla-pastel-strip, .closing-monolith"
+      )
+    );
+
+    fitTargets.forEach((el) => el.classList.add("ios-scroll-fit"));
+
+    const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+    let scrollTick = false;
+
+    function updateFluidScroll() {
+      scrollTick = false;
+      const vh = window.innerHeight || 800;
+
+      // 1) Hero recua levemente como um card de app iOS quando a página sobe
+      if (heroSection) {
+        const rect = heroSection.getBoundingClientRect();
+        if (rect.bottom > 0) {
+          const p = clamp01(-rect.top / vh);
+          heroSection.style.transform = `scale(${(1 - p * 0.035).toFixed(4)})`;
+        }
+      }
+
+      // 2) Container Scroll Perspective (Portfólio desfaz a inclinação 3D e encaixa)
+      scrollStages.forEach((stage) => {
+        const rect = stage.getBoundingClientRect();
+        const p = clamp01((vh - rect.top) / (vh * 0.68));
+        stage.style.setProperty("--stage-p", p.toFixed(3));
+      });
+
+      // 3) Cards Stack (#processo): cada card anterior encolhe sutilmente quando o próximo encaixa por cima
+      stackCards.forEach((card, i) => {
+        const next = stackCards[i + 1];
+        if (!next) {
+          card.style.setProperty("--dock-scale", "1");
+          return;
+        }
+        const cardRect = card.getBoundingClientRect();
+        const nextRect = next.getBoundingClientRect();
+        const overlap = clamp01(1 - (nextRect.top - cardRect.top) / 260);
+        const scale = 1 - overlap * 0.045;
+        card.style.setProperty("--dock-scale", scale.toFixed(4));
+      });
+
+      // 4) Blocos largos encaixam suavemente conforme entram na área útil da tela
+      fitTargets.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const p = clamp01((vh * 1.05 - rect.top) / (vh * 0.42));
+        el.style.setProperty("--fit-p", p.toFixed(3));
+      });
+
+      // Garante que qualquer título ou reveal já visível/passado fique 100% revelado após saltos rápidos
+      textRevealTargets.forEach((el) => {
+        if (!el.classList.contains("is-revealed") && el.getBoundingClientRect().top < vh * 1.08) {
+          el.classList.add("is-revealed");
+        }
+      });
+      revealItems.forEach((el) => {
+        if (!el.classList.contains("is-visible") && el.getBoundingClientRect().top < vh * 1.08) {
+          el.classList.add("is-visible");
+        }
+      });
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!scrollTick) {
+          scrollTick = true;
+          requestAnimationFrame(updateFluidScroll);
+        }
+      },
+      { passive: true }
+    );
+    window.addEventListener("resize", updateFluidScroll, { passive: true });
+    requestAnimationFrame(updateFluidScroll);
+  }
+
+  /* ==========================================================================
+     10B. ELIAS AUTHOR HERO INTERACTIONS (Spotlight + 3D Deck Flip + Typewriter Pad)
+     ========================================================================== */
+  const eaHero = document.getElementById("hero-stage");
+  const eaName = eaHero ? eaHero.querySelector(".ea-giant-name") : null;
+  const eaShowcaseCard = document.getElementById("ea-showcase-card");
+  const eaDeck3d = document.getElementById("ea-deck-3d");
+  const eaDeckImg = document.getElementById("ea-deck-img");
+  const eaDeckPill = document.getElementById("ea-deck-pill");
+  const eaDeckTitle = document.getElementById("ea-deck-title");
+  const eaDeckTags = document.getElementById("ea-deck-tags");
+  const eaTypeText = document.getElementById("ea-type-text");
+  const eaPadCounter = document.getElementById("ea-pad-counter");
+  const eaStampBtn = document.getElementById("ea-stamp-btn");
+
+  // 1) Spotlight outline reveal & subtle portrait/name parallax on pointer move
+  if (eaHero && eaName && !prefersReducedMotion) {
+    eaHero.addEventListener(
+      "pointermove",
+      (e) => {
+        if (e.pointerType === "touch") return;
+        const nRect = eaName.getBoundingClientRect();
+        eaHero.classList.add("has-spot");
+        eaName.style.setProperty("--spot-x", `${(e.clientX - nRect.left).toFixed(1)}px`);
+        eaName.style.setProperty("--spot-y", `${(e.clientY - nRect.top).toFixed(1)}px`);
+
+        const hRect = eaHero.getBoundingClientRect();
+        const nx = (e.clientX - hRect.left) / hRect.width - 0.5;
+        const ny = (e.clientY - hRect.top) / hRect.height - 0.5;
+        eaHero.style.setProperty("--ea-px-fig", `${(nx * -12).toFixed(1)}px`);
+        eaHero.style.setProperty("--ea-py-fig", `${(ny * -8).toFixed(1)}px`);
+        eaHero.style.setProperty("--ea-px-name", `${(nx * 9).toFixed(1)}px`);
+        eaHero.style.setProperty("--ea-py-name", `${(ny * 6).toFixed(1)}px`);
+      },
+      { passive: true }
+    );
+
+    eaHero.addEventListener("pointerleave", () => {
+      eaHero.classList.remove("has-spot");
+      eaHero.style.setProperty("--ea-px-fig", "0px");
+      eaHero.style.setProperty("--ea-py-fig", "0px");
+      eaHero.style.setProperty("--ea-px-name", "0px");
+      eaHero.style.setProperty("--ea-py-name", "0px");
+    });
+  }
+
+  // 2) Interactive 3D Showcase Card: click flips & cycles through real brand collabs
+  const SHOWCASE_ITEMS = [
+    {
+      img: "./assets/fotos/foto-natura.jpeg",
+      pill: "REELS · ADS",
+      pt: { title: "Natura Una · Beleza", tags: "+1,7M views / +100 marcas" },
+      en: { title: "Natura Una · Beauty", tags: "+1.7M views / 100+ brands" }
+    },
+    {
+      img: "./assets/fotos/foto-dove.jpg",
+      pill: "AUTOCUIDADO",
+      pt: { title: "Dove · Rotina Real", tags: "Retenção orgânica / Feed" },
+      en: { title: "Dove · Real Routine", tags: "Organic retention / Feed" }
+    },
+    {
+      img: "./assets/fotos/foto-loreal-protetor.JPG",
+      pill: "SKINCARE",
+      pt: { title: "L'Oréal Paris · FPS 50", tags: "Demo sensorial / Conversão" },
+      en: { title: "L'Oréal Paris · SPF 50", tags: "Sensory demo / Conversion" }
+    },
+    {
+      img: "./assets/fotos/foto-eudora.JPG",
+      pill: "HAIRCARE",
+      pt: { title: "Eudora Siàge · Cabelo", tags: "Storytelling / Tráfego pago" },
+      en: { title: "Eudora Siàge · Haircare", tags: "Storytelling / Paid Social" }
+    }
+  ];
+  let showcaseIdx = 0;
+
+  function renderShowcaseItem(idx) {
+    const item = SHOWCASE_ITEMS[idx];
+    if (!item || !eaDeckImg) return;
+    eaDeckImg.src = item.img;
+    if (eaDeckPill) eaDeckPill.textContent = item.pill;
+    const copy = item[currentLang] || item.pt;
+    if (eaDeckTitle) eaDeckTitle.textContent = copy.title;
+    if (eaDeckTags) eaDeckTags.textContent = copy.tags;
+  }
+
+  if (eaShowcaseCard && eaDeck3d) {
+    const cycleShowcase = () => {
+      eaDeck3d.classList.add("is-flipping");
+      setTimeout(() => {
+        showcaseIdx = (showcaseIdx + 1) % SHOWCASE_ITEMS.length;
+        renderShowcaseItem(showcaseIdx);
+        eaDeck3d.classList.remove("is-flipping");
+      }, 260);
+    };
+    eaShowcaseCard.addEventListener("click", cycleShowcase);
+    eaShowcaseCard.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        cycleShowcase();
+      }
+    });
+  }
+
+  // 3) Auto-typing Studio Pad with rotating creator notes + stamp press
+  const STUDIO_NOTES = {
+    pt: [
+      "Vídeos com ritmo nativo de feed e psicologia do consumo — que vendem sem parecer propaganda.",
+      "18 vendas geradas em 1 único vídeo no TikTok Shop com demonstração honesta na rotina real.",
+      "Roteiro enviado em até 48h e nada é gravado sem o seu ok prévio. Entrega pronta para postar!",
+      "Mais de 100 marcas nacionais e internacionais atendidas em beleza, tech, casa e lifestyle."
+    ],
+    en: [
+      "Feed-native pacing backed by consumer psychology — built to convert without feeling like an ad.",
+      "18 sales driven from a single TikTok Shop video through honest, real-routine storytelling.",
+      "Full script delivered in 48h and approved before filming. Ready-to-post HD deliverables!",
+      "100+ national and international partner brands across beauty, tech, home, and lifestyle."
+    ]
+  };
+  let noteIdx = 0;
+  let charIdx = 0;
+  let typeTimer = null;
+
+  function updatePadCounter() {
+    if (!eaPadCounter) return;
+    const prefix = currentLang === "en" ? "NOTE" : "NOTA";
+    eaPadCounter.textContent = `${prefix} 0${noteIdx + 1} / 04`;
+  }
+
+  function startTypingNote(index) {
+    if (!eaTypeText) return;
+    clearTimeout(typeTimer);
+    const list = STUDIO_NOTES[currentLang] || STUDIO_NOTES.pt;
+    noteIdx = ((index % list.length) + list.length) % list.length;
+    const full = list[noteIdx];
+    updatePadCounter();
+
+    if (prefersReducedMotion) {
+      eaTypeText.textContent = full;
+      return;
+    }
+
+    charIdx = 0;
+    eaTypeText.textContent = "";
+
+    const step = () => {
+      charIdx += 1;
+      eaTypeText.textContent = full.slice(0, charIdx);
+      if (charIdx < full.length) {
+        typeTimer = setTimeout(step, 26);
+      } else {
+        typeTimer = setTimeout(() => {
+          if (eaStampBtn) {
+            eaStampBtn.classList.add("is-pressed");
+            setTimeout(() => eaStampBtn.classList.remove("is-pressed"), 380);
+          }
+          setTimeout(() => startTypingNote(noteIdx + 1), 650);
+        }, 3400);
+      }
+    };
+    step();
+  }
+
+  if (eaStampBtn) {
+    eaStampBtn.addEventListener("click", () => {
+      eaStampBtn.classList.add("is-pressed");
+      setTimeout(() => eaStampBtn.classList.remove("is-pressed"), 320);
+      startTypingNote(noteIdx + 1);
+    });
+  }
+
+  startTypingNote(0);
+
+  /* ==========================================================================
+     11. INITIALIZE
      ========================================================================== */
   hydrateVisiblePortfolioMedia();
   syncVideosCarousel(false);

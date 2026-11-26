@@ -10,11 +10,11 @@
   />
   <meta name="theme-color" content="#f9f7f2" />
 
-  <!-- Google Fonts: Lora + Montserrat + Pinyon Script (fallback web para Sloop Script) -->
+  <!-- Google Fonts: Syne (display gigante da Hero Elias) + Fraunces + Caveat + IBM Plex Mono + Plus Jakarta Sans + Pinyon Script -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Pinyon+Script&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,SOFT,wght@0,9..144,100,400..600;1,9..144,100,400..500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400..700;1,400&family=Syne:wght@700;800&family=Pinyon+Script&display=swap"
     rel="stylesheet"
   />
 
@@ -22,6 +22,13 @@
 </head>
 <body>
   <div class="noise-overlay" aria-hidden="true"></div>
+  <!-- Fundo Fluido Aurora Mesh (inspirado em Honey Ember / 21st.dev, nas cores da Sarah) -->
+  <div class="ios-mesh-bg" aria-hidden="true">
+    <span class="mesh-blob blob-terracotta"></span>
+    <span class="mesh-blob blob-sage"></span>
+    <span class="mesh-blob blob-sand"></span>
+    <span class="mesh-blob blob-blush"></span>
+  </div>
   <!-- Skip Link -->
   <a
     href="#conteudo-principal"
@@ -41,7 +48,10 @@
         <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
           <ul class="nav-list">
             <li>
-              <a href="#sobre" class="nav-link is-active" data-pt="Sobre" data-en="About">Sobre</a>
+              <a href="#sobre" class="nav-link" data-pt="Sobre" data-en="About">Sobre</a>
+            </li>
+            <li>
+              <a href="#marcas" class="nav-link" data-pt="Marcas" data-en="Brands">Marcas</a>
             </li>
             <li>
               <a href="#cases" class="nav-link" data-pt="Cases" data-en="Cases">Cases</a>
@@ -50,7 +60,7 @@
               <a href="#portfolio" class="nav-link" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
             </li>
             <li>
-              <a href="#processo" class="nav-link" data-pt="Processo" data-en="Process">Processo</a>
+              <a href="#depoimentos" class="nav-link" data-pt="Depoimentos" data-en="Testimonials">Depoimentos</a>
             </li>
             <li>
               <a href="#servicos" class="nav-link" data-pt="Pacotes" data-en="Packages">Pacotes</a>
@@ -119,84 +129,169 @@
   </header>
 
   <main id="conteudo-principal">
-    <!-- 2. HERO FULL-BLEED (100% Viewport Background Photo + Coffee Gradient + Bottom-Left Cream Content) -->
-    <section class="hero-section" aria-label="Apresentação Sarah Verçosa">
-      <div class="hero-bg-media">
-        <img
-          src="./assets/fotos/hero.jpg"
-          alt="Sarah Verçosa — UGC Creator em Belo Horizonte"
-          data-alt-pt="Sarah Verçosa — UGC Creator em Belo Horizonte"
-          data-alt-en="Sarah Verçosa — UGC Creator based in Belo Horizonte, Brazil"
-          class="hero-bg-img"
-          width="2768"
-          height="4160"
-          fetchpriority="high"
-        />
-        <div class="hero-scrim" aria-hidden="true"></div>
-      </div>
+    <!-- 2. HERO EDITORIAL INTERATIVO (@clevision/elias-author-hero adaptado para Sarah Verçosa) -->
+    <section class="hero-section ea-hero" id="hero-stage" aria-label="Apresentação Sarah Verçosa">
+      <div class="ea-container">
+        <div class="ea-canvas">
+          <!-- Z-0: Tipografia Display Gigante em Duas Linhas + Camada Spotlight Vazada ao passar o mouse -->
+          <h1 class="ea-giant-name" aria-label="Sarah Verçosa">
+            <span class="ea-line ea-line-first" aria-hidden="true">
+              <span class="ea-fill">SARAH</span>
+              <span class="ea-outline">SARAH</span>
+            </span>
+            <span class="ea-line ea-line-last" aria-hidden="true">
+              <span class="ea-fill">VERÇOSA</span>
+              <span class="ea-outline">VERÇOSA</span>
+            </span>
+          </h1>
 
-      <div class="container hero-content">
-        <div class="hero-copy">
-          <div class="pill-eyebrow reveal">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            <span
-              data-pt="UGC Creator · Nano Influencer · BH"
-              data-en="UGC Creator · Nano Influencer · Brazil"
-            >UGC Creator · Nano Influencer · BH</span>
+          <!-- Z-2: Retrato Recortado em Estúdio sobrepondo o nome gigante -->
+          <figure class="ea-figure">
+            <div class="ea-figure-arch" aria-hidden="true"></div>
+            <img
+              src="./assets/fotos/hero-cutout.png"
+              alt="Sarah Verçosa — UGC Creator em Belo Horizonte"
+              data-alt-pt="Sarah Verçosa — UGC Creator em Belo Horizonte"
+              data-alt-en="Sarah Verçosa — UGC Creator based in Belo Horizonte, Brazil"
+              class="ea-cutout-img"
+              width="1200"
+              height="1803"
+              fetchpriority="high"
+              draggable="false"
+            />
+          </figure>
+
+          <!-- Z-3 (Esquerda Inferior): Coluna Editorial de Apresentação + CTAs + Redes -->
+          <div class="ea-intro">
+            <p
+              class="ea-lead"
+              data-pt="Conteúdo 100% real aliado à psicologia de quem compra."
+              data-en="100% authentic content backed by buyer psychology."
+            >Conteúdo 100% real aliado à psicologia de quem compra.</p>
+
+            <span class="ea-accent-rule" aria-hidden="true"></span>
+
+            <p
+              class="ea-desc"
+              data-pt="Transformo rotina real em vídeos nativos que geram conexão, retenção e conversão em lifestyle, tech e beleza."
+              data-en="Turning an authentic routine into native videos that drive connection, retention, and conversion across lifestyle, tech, and beauty."
+            >Transformo rotina real em vídeos nativos que geram conexão, retenção e conversão em lifestyle, tech e beleza.</p>
+
+            <div class="ea-cta-row">
+              <a
+                href="https://wa.me/5531984817562"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ea-btn-primary"
+              >
+                <span data-pt="Trabalhe comigo" data-en="Work with me">Trabalhe comigo</span>
+                <span class="ea-btn-disc" aria-hidden="true">↗</span>
+              </a>
+              <a href="#portfolio" class="ea-btn-ghost" data-pt="Ver portfólio" data-en="View portfolio">Ver portfólio</a>
+            </div>
+
+            <div class="ea-socials">
+              <a href="https://instagram.com/sahvm" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <span aria-hidden="true">/</span>
+              <a href="https://tiktok.com/@sahsahvm" target="_blank" rel="noopener noreferrer">TikTok</a>
+              <span aria-hidden="true">/</span>
+              <a href="https://tiktok.com/@sahvmart" target="_blank" rel="noopener noreferrer">TikTok Shop</a>
+            </div>
           </div>
 
-          <h1 class="hero-title reveal" data-delay="60">Sarah Verçosa</h1>
-
-          <p
-            class="hero-subtitle reveal"
-            data-delay="120"
-            data-pt="Transformo rotina 100% real em conteúdo que gera conexão, retenção e conversão — unindo lifestyle, tech, beleza e psicologia do consumo."
-            data-en="Turning a 100% authentic routine into content that drives connection, retention, and conversion — blending lifestyle, tech, beauty, and consumer psychology."
-          >
-            Transformo rotina 100% real em conteúdo que gera conexão, retenção e conversão — unindo lifestyle, tech, beleza e psicologia do consumo.
-          </p>
-
-          <!-- CTAs Pastéis Suaves sobre a Foto -->
-          <div class="hero-cta-group reveal" data-delay="180">
-            <a
-              href="https://wa.me/5531984817562"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-hero-primary"
-            >
-              <span data-pt="Trabalhe comigo" data-en="Work with me">Trabalhe comigo</span>
-              <span class="pill-circle-dark" aria-hidden="true">↗</span>
-            </a>
-
-            <a href="#portfolio" class="btn-hero-glass">
-              <span data-pt="Ver portfólio" data-en="View portfolio">Ver portfólio</span>
-            </a>
+          <!-- Z-1 (Direita Superior): Card Interativo 3D de Campanha / Media Kit (clique alterna cases reais) -->
+          <div class="ea-showcase-card" id="ea-showcase-card" role="button" tabindex="0" aria-label="Alternar destaque de campanha">
+            <div class="ea-deck-stage">
+              <div class="ea-deck-3d" id="ea-deck-3d">
+                <div class="ea-deck-back" aria-hidden="true"></div>
+                <div class="ea-deck-front">
+                  <img
+                    src="./assets/fotos/foto-natura.jpeg"
+                    alt="Destaque UGC Sarah Verçosa"
+                    id="ea-deck-img"
+                    draggable="false"
+                  />
+                  <span class="ea-deck-pill" id="ea-deck-pill">REELS · ADS</span>
+                </div>
+              </div>
+              <div class="ea-showcase-copy">
+                <span class="ea-showcase-kicker" data-pt="Case em destaque · clique p/ girar" data-en="Featured collab · click to flip">Case em destaque · clique p/ girar</span>
+                <strong class="ea-showcase-title" id="ea-deck-title">Natura Una · Beleza</strong>
+                <span class="ea-showcase-tags" id="ea-deck-tags">+1,7M views / +100 marcas</span>
+              </div>
+            </div>
+            <a href="#marcas" class="ea-showcase-arrow" aria-label="Ver todas as marcas" onclick="event.stopPropagation()">↗</a>
           </div>
 
-          <!-- 3 Métricas em Creme na Base -->
-          <div class="hero-kpi-strip reveal" data-delay="240">
-            <div class="hero-kpi-item">
-              <strong class="hero-kpi-num kpi-nowrap" data-pt="+1,7M" data-en="+1.7M">+1,7M</strong>
-              <span class="hero-kpi-label" data-pt="Visualizações orgânicas" data-en="Organic views">Visualizações orgânicas</span>
+          <!-- Z-1 (Direita Inferior): Bloco de Nota Datilografada + Carimbo Girado (auto-typing) -->
+          <div class="ea-pad" id="ea-pad">
+            <div class="ea-pad-head">
+              <span class="ea-pad-label" data-pt="NOTA DO ESTÚDIO · ROTEIRO REAL" data-en="STUDIO NOTE · REAL SCRIPT">NOTA DO ESTÚDIO · ROTEIRO REAL</span>
+              <button type="button" class="ea-stamp" id="ea-stamp-btn" title="Próxima nota">
+                <span>100%</span>
+                <span data-pt="ROTINA REAL" data-en="REAL LIFE">ROTINA REAL</span>
+              </button>
             </div>
-            <div class="hero-kpi-item">
-              <strong class="hero-kpi-num kpi-nowrap" data-pt="920&nbsp;mil+" data-en="920K+">920&nbsp;mil+</strong>
-              <span class="hero-kpi-label" data-pt="Alcance em Reel" data-en="Top Reel reach">Alcance em Reel</span>
-            </div>
-            <div class="hero-kpi-item">
-              <strong class="hero-kpi-num kpi-nowrap" data-pt="+100" data-en="100+">+100</strong>
-              <span class="hero-kpi-label" data-pt="Marcas atendidas" data-en="Partner brands">Marcas atendidas</span>
+
+            <p class="ea-pad-greeting" data-pt="Querida marca parceira," data-en="Dear partner brand,">Querida marca parceira,</p>
+            <p class="ea-pad-typewriter">
+              <span id="ea-type-text">Vídeos com ritmo nativo de feed e psicologia do consumo — que vendem sem parecer propaganda.</span><span class="ea-caret" aria-hidden="true"></span>
+            </p>
+
+            <div class="ea-pad-foot">
+              <div class="ea-pad-kpis">
+                <span><strong>+1,7M</strong> views</span>
+                <span>·</span>
+                <span><strong>920 mil+</strong> alcance</span>
+                <span>·</span>
+                <span><strong>+100</strong> marcas</span>
+              </div>
+              <span class="ea-pad-counter" id="ea-pad-counter">NOTA 01 / 04</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Faixa fluida de palavras-chave (estilo fita das referências, nas cores da Sarah) -->
+    <div class="fluid-ribbon" aria-hidden="true">
+      <div class="fluid-ribbon-track">
+        <div class="fluid-ribbon-group">
+          <span data-pt="Rotina 100% real" data-en="100% real routine">Rotina 100% real</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="Psicologia do Consumo" data-en="Consumer Psychology">Psicologia do Consumo</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="Zero cara de publi" data-en="Zero ad fatigue">Zero cara de publi</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="Criativos que convertem" data-en="High-converting UGC">Criativos que convertem</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="+100 marcas atendidas" data-en="100+ partner brands">+100 marcas atendidas</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="Lifestyle · Tech · Beleza" data-en="Lifestyle · Tech · Beauty">Lifestyle · Tech · Beleza</span>
+          <i class="ribbon-dot">✦</i>
+        </div>
+        <div class="fluid-ribbon-group">
+          <span data-pt="Rotina 100% real" data-en="100% real routine">Rotina 100% real</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="Psicologia do Consumo" data-en="Consumer Psychology">Psicologia do Consumo</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="Zero cara de publi" data-en="Zero ad fatigue">Zero cara de publi</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="Criativos que convertem" data-en="High-converting UGC">Criativos que convertem</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="+100 marcas atendidas" data-en="100+ partner brands">+100 marcas atendidas</span>
+          <i class="ribbon-dot">✦</i>
+          <span data-pt="Lifestyle · Tech · Beleza" data-en="Lifestyle · Tech · Beauty">Lifestyle · Tech · Beleza</span>
+          <i class="ribbon-dot">✦</i>
+        </div>
+      </div>
+    </div>
+
     <!-- Brands Logo Marquee (Infinite Seamless Loop) -->
     <div class="brands-marquee-section">
         <div class="container">
           <div class="marquee-head">
-            <span class="marquee-count-pill" data-pt="✦ + de 100 marcas atendidas" data-en="✦ 100+ brands collaborated">✦ + de 100 marcas atendidas</span>
+            <span class="marquee-count-pill" data-pt="+ de 100 marcas atendidas" data-en="100+ brand collaborations">+ de 100 marcas atendidas</span>
             <p
               class="marquee-label"
               data-pt="EXPERIÊNCIA COM MARCAS NACIONAIS E INTERNACIONAIS"
@@ -320,15 +415,30 @@
     <section class="section about-section" id="sobre">
       <div class="container">
         <div class="about-limelight-grid">
-          <!-- Left: 4:5 Rounded-[2rem] Portrait + Overlapping Stat Card -->
+          <!-- Left: Polaroid dupla sobreposta + fita washi + nota manuscrita com seta curva -->
           <div class="about-photo-col reveal">
+            <div class="about-hand-note" aria-hidden="true">
+              <span data-pt="mineira raiz, psicóloga &amp; CLT real!" data-en="psychologist &amp; 100% real routine!">mineira raiz, psicóloga &amp; CLT real!</span>
+              <svg class="hand-arrow-svg" viewBox="0 0 88 54" fill="none">
+                <path d="M6 8 C34 4, 62 18, 74 44" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+                <path d="M63 42 L75 46 L78 33" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
             <div class="about-portrait-wrap">
+              <span class="washi-tape" aria-hidden="true"></span>
               <img
                 src="./assets/fotos/IMG_0874.JPG"
                 alt="Sarah Verçosa — Psicóloga e UGC Creator em Belo Horizonte"
                 loading="lazy"
               />
             </div>
+
+            <figure class="about-mini-polaroid" aria-hidden="true">
+              <img src="./assets/fotos/IMG_0866.JPG" alt="" loading="lazy" />
+              <figcaption>@sahvm</figcaption>
+            </figure>
+
             <div class="about-overlap-card">
               <span class="overlap-stat-big" data-pt="Atendimento Global" data-en="Global Reach">Atendimento Global</span>
               <span
@@ -357,9 +467,9 @@
             </p>
 
             <div class="about-quick-badges">
-              <span class="quick-badge" data-pt="📍 Belo Horizonte, MG" data-en="📍 Belo Horizonte, Brazil">📍 Belo Horizonte, MG</span>
-              <span class="quick-badge" data-pt="🎓 Psicóloga · Pós em Consumo" data-en="🎓 Psychologist · Consumer Psych">🎓 Psicóloga · Pós em Consumo</span>
-              <span class="quick-badge" data-pt="🎬 UGC Creator" data-en="🎬 UGC Creator">🎬 UGC Creator</span>
+              <span class="quick-badge" data-pt="Belo Horizonte, MG" data-en="Belo Horizonte, Brazil">Belo Horizonte, MG</span>
+              <span class="quick-badge" data-pt="Psicóloga · Pós em Consumo" data-en="Psychologist · Consumer Psych">Psicóloga · Pós em Consumo</span>
+              <span class="quick-badge" data-pt="UGC Creator" data-en="UGC Creator">UGC Creator</span>
             </div>
 
             <!-- Destaque do Canva: Coerência estética + Psicologia do Consumidor -->
@@ -373,10 +483,18 @@
           </div>
         </div>
 
-        <!-- 3 Color-Blocked Pillar Cards (UGC Limelight 01 / 02 / 03 Tonal Blocks) -->
+        <!-- 3 Etiquetas de caderno / fita adesiva (substitui os 3 cards SaaS genéricos) -->
+        <div class="pillars-scrapbook-head reveal">
+          <span class="hand-kicker" data-pt="por que funciona tão bem ↓" data-en="why it converts so well ↓">por que funciona tão bem ↓</span>
+        </div>
+
         <div class="pillars-grid">
           <article class="pillar-card pillar-tone-terracotta reveal" data-delay="0">
-            <span class="pillar-num">01</span>
+            <span class="card-tape" aria-hidden="true"></span>
+            <div class="pillar-top-bar">
+              <span class="pillar-num">01</span>
+              <span class="pillar-hand-tag" data-pt="gatilho real" data-en="buyer trigger">gatilho real</span>
+            </div>
             <div class="pillar-bottom">
               <h3
                 class="pillar-title"
@@ -392,7 +510,11 @@
           </article>
 
           <article class="pillar-card pillar-tone-sage reveal" data-delay="90">
-            <span class="pillar-num">02</span>
+            <span class="card-tape" aria-hidden="true"></span>
+            <div class="pillar-top-bar">
+              <span class="pillar-num">02</span>
+              <span class="pillar-hand-tag" data-pt="sem cara de anúncio" data-en="native feel">sem cara de anúncio</span>
+            </div>
             <div class="pillar-bottom">
               <h3
                 class="pillar-title"
@@ -408,7 +530,11 @@
           </article>
 
           <article class="pillar-card pillar-tone-sand reveal" data-delay="180">
-            <span class="pillar-num">03</span>
+            <span class="card-tape" aria-hidden="true"></span>
+            <div class="pillar-top-bar">
+              <span class="pillar-num">03</span>
+              <span class="pillar-hand-tag" data-pt="pronto pra escalar" data-en="ad-ready">pronto pra escalar</span>
+            </div>
             <div class="pillar-bottom">
               <h3
                 class="pillar-title"
@@ -424,25 +550,270 @@
           </article>
         </div>
 
-        <!-- Pastel Botanical 4-Metric Proof Band -->
-        <div class="dark-stats-band reveal">
-          <div class="dark-stat-cell">
-            <strong class="dark-stat-num counter-val" data-count-target="1.7" data-count-decimals="1" data-prefix="+" data-suffix-pt="M" data-suffix-en="M" data-pt="+1,7M" data-en="+1.7M">+1,7M</strong>
-            <span class="dark-stat-lbl" data-pt="Visualizações orgânicas" data-en="Organic views">Visualizações orgânicas</span>
+        <!-- Faixa de Nichos & Formatos estilo iOS Pills + Polaroid lateral (sem repetir as métricas do Hero) -->
+        <div class="creator-dna-band reveal">
+          <div class="dna-copy">
+            <span class="dna-hand" data-pt="onde minha rotina conecta de verdade" data-en="where my routine truly connects">onde minha rotina conecta de verdade</span>
+            <h3 class="dna-title" data-pt="Falo com a mulher real que trabalha, se cuida, monta a casa e decide a compra." data-en="Speaking directly to real women balancing career, self-care, home, and everyday purchases.">Falo com a mulher real que trabalha, se cuida, monta a casa e decide a compra.</h3>
+            <div class="dna-pills">
+              <span data-pt="Beleza &amp; Skincare" data-en="Beauty &amp; Skincare">Beleza &amp; Skincare</span>
+              <span data-pt="Apps &amp; Tech" data-en="Apps &amp; Tech">Apps &amp; Tech</span>
+              <span data-pt="Casa &amp; Decor" data-en="Home &amp; Decor">Casa &amp; Decor</span>
+              <span data-pt="Fragrâncias" data-en="Fragrances">Fragrâncias</span>
+              <span data-pt="Rotina CLT" data-en="9-to-5 Routine">Rotina CLT</span>
+              <span data-pt="TikTok Shop · 18 vendas em 1 vídeo" data-en="TikTok Shop · 18 sales in 1 video">TikTok Shop · 18 vendas em 1 vídeo</span>
+            </div>
           </div>
-          <div class="dark-stat-cell">
-            <strong class="dark-stat-num counter-val" data-count-target="920.7" data-count-decimals="1" data-suffix-pt=" mil" data-suffix-en="K" data-pt="920,7&nbsp;mil" data-en="920.7K">920,7&nbsp;mil</strong>
-            <span class="dark-stat-lbl" data-pt="Contas alcançadas" data-en="Accounts reached">Contas alcançadas</span>
+          <figure class="dna-polaroid">
+            <img src="./assets/fotos/IMG_0872.JPG" alt="Sarah Verçosa criando conteúdo UGC" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3B. MARCAS EM DESTAQUE (#marcas) — Deck orgânico estilo polaroid + selo flutuante -->
+    <section class="section brands-section" id="marcas">
+      <div class="section-wave section-wave-top" aria-hidden="true">
+        <svg viewBox="0 0 1440 72" preserveAspectRatio="none"><path d="M0,48 C280,0 560,72 880,32 C1140,0 1320,40 1440,24 L1440,72 L0,72 Z"/></svg>
+      </div>
+      <div class="container">
+        <div class="brands-header-wrap reveal">
+          <div class="section-head-centered">
+            <span class="section-pill" data-pt="Marcas &amp; parcerias" data-en="Brands &amp; partnerships">Marcas &amp; parcerias</span>
+            <h2
+              class="section-title"
+              data-pt="Marcas que já confiaram no meu olhar."
+              data-en="Brands that have trusted my eye."
+              data-hl-pt="olhar" data-hl-en="eye"
+            >Marcas que já confiaram no meu olhar.</h2>
+            <p
+              class="section-sub-centered"
+              data-pt="De gigantes da beleza a apps e marcas de casa: cada parceria com roteiro próprio, estética alinhada à identidade da marca e rotina 100% real."
+              data-en="From beauty giants to apps and home brands: every partnership with its own script, aesthetics aligned to the brand identity, and a 100% real routine."
+            >De gigantes da beleza a apps e marcas de casa: cada parceria com roteiro próprio, estética alinhada à identidade da marca e rotina 100% real.</p>
           </div>
-          <div class="dark-stat-cell">
-            <strong class="dark-stat-num counter-val" data-count-target="100" data-count-decimals="0" data-prefix-pt="+" data-prefix-en="" data-suffix-en="+" data-pt="+100" data-en="100+">+100</strong>
-            <span class="dark-stat-lbl" data-pt="Marcas atendidas" data-en="Partner brands">Marcas atendidas</span>
-          </div>
-          <div class="dark-stat-cell">
-            <strong class="dark-stat-num counter-val" data-count-target="18" data-count-decimals="0" data-suffix-pt=" vendas" data-suffix-en=" sales" data-pt="18 vendas" data-en="18 sales">18 vendas</strong>
-            <span class="dark-stat-lbl" data-pt="Em 1 único vídeo TikTok Shop" data-en="From a single TikTok Shop video">Em 1 único vídeo TikTok Shop</span>
+          <div class="brands-sticker-badge" aria-hidden="true">
+            <span class="sticker-big">+100</span>
+            <span class="sticker-sub" data-pt="marcas reais" data-en="real brands">marcas reais</span>
           </div>
         </div>
+
+        <div class="brands-feature-grid">
+          <!-- 01 · Natura (destaque) -->
+          <article class="brand-feature reveal">
+            <button
+              type="button"
+              class="brand-photo-btn"
+              data-lightbox-src="./assets/fotos/foto-natura.jpeg"
+              data-caption-pt="Natura Una · Fragrância &amp; Maquiagem"
+              data-caption-en="Natura Una · Fragrance &amp; Makeup"
+              aria-label="Ampliar foto — Natura Una"
+              data-aria-pt="Ampliar foto — Natura Una"
+              data-aria-en="Enlarge photo — Natura Una"
+            >
+              <img src="./assets/fotos/foto-natura.jpeg" alt="Sarah Verçosa com Natura Una Nude" loading="lazy" />
+              <span class="brand-index" aria-hidden="true">01</span>
+            </button>
+            <div class="brand-feature-meta">
+              <div class="brand-feature-text">
+                <span class="brand-feature-name">Natura</span>
+                <span class="brand-feature-cat" data-pt="Una · Fragrância &amp; maquiagem" data-en="Una · Fragrance &amp; makeup">Una · Fragrância &amp; maquiagem</span>
+              </div>
+              <img src="./assets/logos/natura-108.png" alt="" class="brand-feature-logo logo-tight" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- 02 · Dove -->
+          <article class="brand-feature reveal" data-delay="60">
+            <button
+              type="button"
+              class="brand-photo-btn"
+              data-lightbox-src="./assets/fotos/foto-dove.jpg"
+              data-caption-pt="Dove · Autocuidado &amp; Frescor"
+              data-caption-en="Dove · Self-Care &amp; Freshness"
+              aria-label="Ampliar foto — Dove"
+              data-aria-pt="Ampliar foto — Dove"
+              data-aria-en="Enlarge photo — Dove"
+            >
+              <img src="./assets/fotos/foto-dove.jpg" alt="Sarah Verçosa com Dove Original" loading="lazy" />
+              <span class="brand-index" aria-hidden="true">02</span>
+            </button>
+            <div class="brand-feature-meta">
+              <div class="brand-feature-text">
+                <span class="brand-feature-name">Dove</span>
+                <span class="brand-feature-cat" data-pt="Beleza · Autocuidado" data-en="Beauty · Self-care">Beleza · Autocuidado</span>
+              </div>
+              <img src="./assets/logos/dove-logo.png" alt="" class="brand-feature-logo" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- 03 · L'Oréal Paris -->
+          <article class="brand-feature reveal" data-delay="120">
+            <button
+              type="button"
+              class="brand-photo-btn"
+              data-lightbox-src="./assets/fotos/foto-loreal-protetor.JPG"
+              data-caption-pt="L'Oréal Paris · Solar Expertise FPS 50"
+              data-caption-en="L'Oréal Paris · Solar Expertise SPF 50"
+              aria-label="Ampliar foto — L'Oréal Paris"
+              data-aria-pt="Ampliar foto — L'Oréal Paris"
+              data-aria-en="Enlarge photo — L'Oréal Paris"
+            >
+              <img src="./assets/fotos/foto-loreal-protetor.JPG" alt="Sarah Verçosa com L'Oréal Paris FPS 50" loading="lazy" />
+              <span class="brand-index" aria-hidden="true">03</span>
+            </button>
+            <div class="brand-feature-meta">
+              <div class="brand-feature-text">
+                <span class="brand-feature-name">L'Oréal Paris</span>
+                <span class="brand-feature-cat" data-pt="Skincare · Solar FPS 50" data-en="Skincare · SPF 50">Skincare · Solar FPS 50</span>
+              </div>
+              <img src="./assets/logos/loreal-paris-vector-logo.png" alt="" class="brand-feature-logo logo-wide-pad" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- 04 · Eudora -->
+          <article class="brand-feature reveal" data-delay="60">
+            <button
+              type="button"
+              class="brand-photo-btn"
+              data-lightbox-src="./assets/fotos/foto-eudora.JPG"
+              data-caption-pt="Eudora Siàge · Ultra Bond Reset"
+              data-caption-en="Eudora Siàge · Ultra Bond Reset"
+              aria-label="Ampliar foto — Eudora Siàge"
+              data-aria-pt="Ampliar foto — Eudora Siàge"
+              data-aria-en="Enlarge photo — Eudora Siàge"
+            >
+              <img src="./assets/fotos/foto-eudora.JPG" alt="Sarah Verçosa com Eudora Siàge" loading="lazy" />
+              <span class="brand-index" aria-hidden="true">04</span>
+            </button>
+            <div class="brand-feature-meta">
+              <div class="brand-feature-text">
+                <span class="brand-feature-name">Eudora</span>
+                <span class="brand-feature-cat" data-pt="Siàge · Haircare" data-en="Siàge · Haircare">Siàge · Haircare</span>
+              </div>
+              <img src="./assets/logos/logo-eudora-4096.png" alt="" class="brand-feature-logo" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- 05 · OMO -->
+          <article class="brand-feature reveal" data-delay="120">
+            <button
+              type="button"
+              class="brand-photo-btn"
+              data-lightbox-src="./assets/fotos/foto-omo.JPG"
+              data-caption-pt="OMO Ciclo Rápido · Rotina Real"
+              data-caption-en="OMO Quick Cycle · Real Routine"
+              aria-label="Ampliar foto — OMO"
+              data-aria-pt="Ampliar foto — OMO"
+              data-aria-en="Enlarge photo — OMO"
+            >
+              <img src="./assets/fotos/foto-omo.JPG" alt="Sarah Verçosa com OMO Ciclo Rápido" loading="lazy" />
+              <span class="brand-index" aria-hidden="true">05</span>
+            </button>
+            <div class="brand-feature-meta">
+              <div class="brand-feature-text">
+                <span class="brand-feature-name">OMO</span>
+                <span class="brand-feature-cat" data-pt="Casa · Ciclo Rápido" data-en="Home · Quick Cycle">Casa · Ciclo Rápido</span>
+              </div>
+              <img src="./assets/logos/omo-logo.png" alt="" class="brand-feature-logo" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- 06 · Beleza Brasileira -->
+          <article class="brand-feature reveal">
+            <button
+              type="button"
+              class="brand-photo-btn"
+              data-lightbox-src="./assets/fotos/foto-bumbum-creme.JPG"
+              data-caption-pt="Beleza Brasileira · Body Care"
+              data-caption-en="Beleza Brasileira · Body Care"
+              aria-label="Ampliar foto — Beleza Brasileira"
+              data-aria-pt="Ampliar foto — Beleza Brasileira"
+              data-aria-en="Enlarge photo — Beleza Brasileira"
+            >
+              <img src="./assets/fotos/foto-bumbum-creme.JPG" alt="Sarah Verçosa com Beleza Brasileira" loading="lazy" />
+              <span class="brand-index" aria-hidden="true">06</span>
+            </button>
+            <div class="brand-feature-meta">
+              <div class="brand-feature-text">
+                <span class="brand-feature-name">Beleza Brasileira</span>
+                <span class="brand-feature-cat" data-pt="Body care" data-en="Body care">Body care</span>
+              </div>
+              <img src="./assets/logos/beleza-brasileira-logo.jpg" alt="" class="brand-feature-logo logo-knockout" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- 07 · Sterily -->
+          <article class="brand-feature reveal" data-delay="60">
+            <button
+              type="button"
+              class="brand-photo-btn"
+              data-lightbox-src="./assets/fotos/foto-sterily.jpg"
+              data-caption-pt="Sterily · Casa &amp; Rotina Inteligente"
+              data-caption-en="Sterily · Smart Home Routine"
+              aria-label="Ampliar foto — Sterily"
+              data-aria-pt="Ampliar foto — Sterily"
+              data-aria-en="Enlarge photo — Sterily"
+            >
+              <img src="./assets/fotos/foto-sterily.jpg" alt="Sarah Verçosa com Sterily" loading="lazy" />
+              <span class="brand-index" aria-hidden="true">07</span>
+            </button>
+            <div class="brand-feature-meta">
+              <div class="brand-feature-text">
+                <span class="brand-feature-name">Sterily</span>
+                <span class="brand-feature-cat" data-pt="Casa · Rotina inteligente" data-en="Home · Smart routine">Casa · Rotina inteligente</span>
+              </div>
+              <img src="./assets/logos/sterily-logo.png" alt="" class="brand-feature-logo" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- 08 · Méliuz (card tipográfico — conteúdo em vídeo) -->
+          <article class="brand-feature reveal" data-delay="120">
+            <a href="#portfolio" class="brand-type-card brand-type-sage">
+              <span class="brand-index" aria-hidden="true">08</span>
+              <img src="./assets/logos/meliuz-256.png" alt="Méliuz" class="brand-type-logo" loading="lazy" />
+              <span class="brand-type-note" data-pt="Publi em vídeo · ver no portfólio →" data-en="Video ad · see in portfolio →">Publi em vídeo · ver no portfólio →</span>
+            </a>
+            <div class="brand-feature-meta">
+              <div class="brand-feature-text">
+                <span class="brand-feature-name">Méliuz</span>
+                <span class="brand-feature-cat" data-pt="Tech · App de cashback" data-en="Tech · Cashback app">Tech · App de cashback</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 09 · mitz.decor (card tipográfico — collab em vídeo) -->
+          <article class="brand-feature reveal" data-delay="180">
+            <a href="#cases" class="brand-type-card brand-type-rose">
+              <span class="brand-index" aria-hidden="true">09</span>
+              <span class="brand-type-word" translate="no">mitz.decor</span>
+              <span class="brand-type-note" data-pt="Collab em vídeo · ver nos cases →" data-en="Video collab · see in cases →">Collab em vídeo · ver nos cases →</span>
+            </a>
+            <div class="brand-feature-meta">
+              <div class="brand-feature-text">
+                <span class="brand-feature-name" translate="no">mitz.decor</span>
+                <span class="brand-feature-cat" data-pt="Casa &amp; decor · Collab" data-en="Home &amp; decor · Collab">Casa &amp; decor · Collab</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="brands-more reveal">
+          <p>
+            <strong class="brands-more-num" data-pt="+100" data-en="100+">+100</strong>
+            <span
+              data-pt="marcas atendidas entre beleza, casa, tech, moda, fragrância, gastronomia e experiências."
+              data-en="brands served across beauty, home, tech, fashion, fragrance, food, and experiences."
+            >marcas atendidas entre beleza, casa, tech, moda, fragrância, gastronomia e experiências.</span>
+          </p>
+          <a href="https://wa.me/5531984817562" target="_blank" rel="noopener noreferrer" class="link-underline">
+            <span data-pt="Quero minha marca aqui" data-en="I want my brand here">Quero minha marca aqui</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+      <div class="section-wave section-wave-bottom" aria-hidden="true">
+        <svg viewBox="0 0 1440 72" preserveAspectRatio="none"><path d="M0,0 L1440,0 L1440,28 C1180,72 860,4 520,44 C260,74 110,36 0,52 Z"/></svg>
       </div>
     </section>
 
@@ -665,7 +1036,7 @@
 
     <!-- 5. PORTFÓLIO POR NICHO (#portfolio) — Borderless 9:16 Video Cards + Editorial Arc Photo Gallery -->
     <section class="section portfolio-section" id="portfolio">
-      <div class="container">
+      <div class="container" data-scroll-stage>
         <div class="section-head-centered reveal">
           <span class="section-pill" data-pt="Portfólio em Ação" data-en="Short-Form Showcase">Portfólio em Ação</span>
           <h2
@@ -1362,256 +1733,183 @@
           </div>
         </div>
 
-        <!-- CONTENT GALLERY (21st.dev 3D Coverflow Carousel — 7 Real Product Photos) -->
-        <div class="photo-gallery-block">
-          <div class="section-head-centered reveal">
-            <span class="section-pill" data-pt="Galeria de Conteúdo" data-en="Content Gallery">Galeria de Conteúdo</span>
-            <h3
-              class="section-title"
-              data-pt="Fotografia UGC na prática."
-              data-en="My UGC work in the wild."
-            >Fotografia UGC na prática.</h3>
-            <p
-              class="section-sub-centered"
-              data-pt="Registros reais de produto para anúncios, redes sociais e páginas de venda. Toque para ampliar."
-              data-en="Real product photography for paid ads, social media, and sales pages. Tap to enlarge."
-            >Registros reais de produto para anúncios, redes sociais e páginas de venda. Toque para ampliar.</p>
-          </div>
-
-          <div
-            class="coverflow-carousel reveal"
-            id="product-coverflow"
-            role="region"
-            aria-roledescription="carousel"
-            aria-label="Carrossel de fotos de produtos UGC"
-            data-aria-pt="Carrossel de fotos de produtos UGC"
-            data-aria-en="UGC product photography carousel"
-          >
-            <div class="coverflow-stage" id="coverflow-stage">
-              <figure class="coverflow-slide" data-slide-index="0">
-                <button
-                  type="button"
-                  class="coverflow-card-btn"
-                  data-lightbox-src="./assets/fotos/foto-dove.jpg"
-                  data-caption-pt="Dove · Autocuidado & Frescor"
-                  data-caption-en="Dove · Self-Care & Freshness"
-                  aria-label="Dove · Beleza"
-                  data-aria-pt="Dove · Beleza"
-                  data-aria-en="Dove · Beauty"
-                >
-                  <img src="./assets/fotos/foto-dove.jpg" alt="Sarah Verçosa com Dove Original" loading="lazy" draggable="false" />
-                  <span class="coverflow-zoom-hint" aria-hidden="true">↗</span>
-                  <span class="tile-tag" data-pt="Dove · Beleza" data-en="Dove · Beauty">Dove · Beleza</span>
-                </button>
-              </figure>
-
-              <figure class="coverflow-slide" data-slide-index="1">
-                <button
-                  type="button"
-                  class="coverflow-card-btn"
-                  data-lightbox-src="./assets/fotos/foto-loreal-protetor.JPG"
-                  data-caption-pt="L'Oréal Paris · Solar Expertise FPS 50"
-                  data-caption-en="L'Oréal Paris · Solar Expertise SPF 50"
-                  aria-label="L'Oréal Paris"
-                >
-                  <img src="./assets/fotos/foto-loreal-protetor.JPG" alt="Sarah Verçosa com L'Oréal Paris FPS 50" loading="lazy" draggable="false" />
-                  <span class="coverflow-zoom-hint" aria-hidden="true">↗</span>
-                  <span class="tile-tag" data-pt="L'Oréal Paris" data-en="L'Oréal Paris">L'Oréal Paris</span>
-                </button>
-              </figure>
-
-              <figure class="coverflow-slide" data-slide-index="2">
-                <button
-                  type="button"
-                  class="coverflow-card-btn"
-                  data-lightbox-src="./assets/fotos/foto-natura.jpeg"
-                  data-caption-pt="Natura Una · Fragrância & Maquiagem"
-                  data-caption-en="Natura Una · Fragrance & Makeup"
-                  aria-label="Natura Una"
-                >
-                  <img src="./assets/fotos/foto-natura.jpeg" alt="Sarah Verçosa com Natura Una Nude" loading="lazy" draggable="false" />
-                  <span class="coverflow-zoom-hint" aria-hidden="true">↗</span>
-                  <span class="tile-tag" data-pt="Natura Una" data-en="Natura Una">Natura Una</span>
-                </button>
-              </figure>
-
-              <figure class="coverflow-slide" data-slide-index="3">
-                <button
-                  type="button"
-                  class="coverflow-card-btn"
-                  data-lightbox-src="./assets/fotos/foto-bumbum-creme.JPG"
-                  data-caption-pt="Beleza Brasileira · Body Care"
-                  data-caption-en="Beleza Brasileira · Body Care"
-                  aria-label="Beleza Brasileira"
-                >
-                  <img src="./assets/fotos/foto-bumbum-creme.JPG" alt="Sarah Verçosa com Beleza Brasileira" loading="lazy" draggable="false" />
-                  <span class="coverflow-zoom-hint" aria-hidden="true">↗</span>
-                  <span class="tile-tag" data-pt="Beleza Brasileira" data-en="Beleza Brasileira">Beleza Brasileira</span>
-                </button>
-              </figure>
-
-              <figure class="coverflow-slide" data-slide-index="4">
-                <button
-                  type="button"
-                  class="coverflow-card-btn"
-                  data-lightbox-src="./assets/fotos/foto-eudora.JPG"
-                  data-caption-pt="Eudora Siàge · Ultra Bond Reset"
-                  data-caption-en="Eudora Siàge · Ultra Bond Reset"
-                  aria-label="Eudora Siàge"
-                >
-                  <img src="./assets/fotos/foto-eudora.JPG" alt="Sarah Verçosa com Eudora Siàge" loading="lazy" draggable="false" />
-                  <span class="coverflow-zoom-hint" aria-hidden="true">↗</span>
-                  <span class="tile-tag" data-pt="Eudora Siàge" data-en="Eudora Siàge">Eudora Siàge</span>
-                </button>
-              </figure>
-
-              <figure class="coverflow-slide" data-slide-index="5">
-                <button
-                  type="button"
-                  class="coverflow-card-btn"
-                  data-lightbox-src="./assets/fotos/foto-sterily.jpg"
-                  data-caption-pt="Sterily · Casa & Rotina Inteligente"
-                  data-caption-en="Sterily · Smart Home Routine"
-                  aria-label="Sterily · Casa"
-                  data-aria-pt="Sterily · Casa"
-                  data-aria-en="Sterily · Home"
-                >
-                  <img src="./assets/fotos/foto-sterily.jpg" alt="Sarah Verçosa com Sterily" loading="lazy" draggable="false" />
-                  <span class="coverflow-zoom-hint" aria-hidden="true">↗</span>
-                  <span class="tile-tag" data-pt="Sterily · Casa" data-en="Sterily · Home">Sterily · Casa</span>
-                </button>
-              </figure>
-
-              <figure class="coverflow-slide" data-slide-index="6">
-                <button
-                  type="button"
-                  class="coverflow-card-btn"
-                  data-lightbox-src="./assets/fotos/foto-omo.JPG"
-                  data-caption-pt="OMO Ciclo Rápido · Rotina Real"
-                  data-caption-en="OMO Quick Cycle · Real Routine"
-                  aria-label="OMO · Rotina"
-                  data-aria-pt="OMO · Rotina"
-                  data-aria-en="OMO · Routine"
-                >
-                  <img src="./assets/fotos/foto-omo.JPG" alt="Sarah Verçosa com OMO Ciclo Rápido" loading="lazy" draggable="false" />
-                  <span class="coverflow-zoom-hint" aria-hidden="true">↗</span>
-                  <span class="tile-tag" data-pt="OMO · Rotina" data-en="OMO · Routine">OMO · Rotina</span>
-                </button>
-              </figure>
-            </div>
-
-            <!-- Controles Minimalistas (Setas + Bolinhas) -->
-            <div class="coverflow-controls">
-              <button
-                type="button"
-                class="coverflow-arrow"
-                id="coverflow-prev"
-                aria-label="Foto anterior"
-                data-aria-pt="Foto anterior"
-                data-aria-en="Previous photo"
-              >
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-
-              <div
-                class="coverflow-dots"
-                id="coverflow-dots"
-                role="group"
-                aria-label="Selecionar foto"
-                data-aria-pt="Selecionar foto"
-                data-aria-en="Select photo"
-              >
-                <button type="button" class="coverflow-dot" data-dot-index="0" aria-current="false" aria-label="Foto 1 — Dove" data-aria-pt="Foto 1 — Dove" data-aria-en="Photo 1 — Dove"></button>
-                <button type="button" class="coverflow-dot" data-dot-index="1" aria-current="false" aria-label="Foto 2 — L'Oréal Paris" data-aria-pt="Foto 2 — L'Oréal Paris" data-aria-en="Photo 2 — L'Oréal Paris"></button>
-                <button type="button" class="coverflow-dot is-active" data-dot-index="2" aria-current="true" aria-label="Foto 3 — Natura Una" data-aria-pt="Foto 3 — Natura Una" data-aria-en="Photo 3 — Natura Una"></button>
-                <button type="button" class="coverflow-dot" data-dot-index="3" aria-current="false" aria-label="Foto 4 — Beleza Brasileira" data-aria-pt="Foto 4 — Beleza Brasileira" data-aria-en="Photo 4 — Beleza Brasileira"></button>
-                <button type="button" class="coverflow-dot" data-dot-index="4" aria-current="false" aria-label="Foto 5 — Eudora Siàge" data-aria-pt="Foto 5 — Eudora Siàge" data-aria-en="Photo 5 — Eudora Siàge"></button>
-                <button type="button" class="coverflow-dot" data-dot-index="5" aria-current="false" aria-label="Foto 6 — Sterily" data-aria-pt="Foto 6 — Sterily" data-aria-en="Photo 6 — Sterily"></button>
-                <button type="button" class="coverflow-dot" data-dot-index="6" aria-current="false" aria-label="Foto 7 — OMO" data-aria-pt="Foto 7 — OMO" data-aria-en="Photo 7 — OMO"></button>
-              </div>
-
-              <button
-                type="button"
-                class="coverflow-arrow"
-                id="coverflow-next"
-                aria-label="Próxima foto"
-                data-aria-pt="Próxima foto"
-                data-aria-en="Next photo"
-              >
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- 6. PROCESSO DE TRABALHO (#processo) — Etapas Reais do Canva + Prazos Claros -->
-    <section class="section process-section" id="processo">
+    <!-- 5B. DEPOIMENTOS (#depoimentos) — Balões estilo iMessage / WhatsApp / DM de marcas parceiras
+         (quando a Sarah enviar prints/frases literais com nome da marca, basta trocar o texto de cada balão) -->
+    <section class="section testimonials-section" id="depoimentos">
+      <div class="section-wave section-wave-top" aria-hidden="true">
+        <svg viewBox="0 0 1440 72" preserveAspectRatio="none"><path d="M0,40 C320,8 620,68 960,28 C1180,4 1340,42 1440,22 L1440,72 L0,72 Z"/></svg>
+      </div>
       <div class="container">
-        <div class="section-head-centered reveal">
-          <span class="section-pill" data-pt="Como Funciona · Edição 2026" data-en="Workflow · 2026 Edition">Como Funciona · Edição 2026</span>
-          <h2
-            class="section-title"
-            data-pt="Processo leve, prazos claros e entregas prontas para postar."
-            data-en="Seamless process, clear timelines, and ready-to-post deliverables." data-hl-pt="claros" data-hl-en="clear"
-          >Processo leve, prazos claros e entregas prontas para postar.</h2>
+        <div class="testimonials-head-row reveal">
+          <div class="section-head-centered">
+            <span class="section-pill" data-pt="Feedback das marcas" data-en="Brand feedback">Feedback das marcas</span>
+            <h2
+              class="section-title"
+              data-pt="Quem já trabalhou comigo, recomenda."
+              data-en="Those who've worked with me, recommend me."
+              data-hl-pt="recomenda" data-hl-en="recommend"
+            >Quem já trabalhou comigo, recomenda.</h2>
+          </div>
+          <span class="dm-hand-note" aria-hidden="true" data-pt="mensagens que chegam pós-entrega ♡" data-en="messages after delivery ♡">mensagens que chegam pós-entrega ♡</span>
         </div>
 
-        <!-- 4 Tall Pastel Step Cards (Alinhamento, Roteiro, Entrega, Pós-entrega) -->
-        <ol class="steps-grid">
-          <li class="step-card step-tone-1 reveal" data-delay="0">
-            <span class="step-num">01</span>
-            <div class="step-bottom">
-              <h3 class="step-title" data-pt="Alinhamento" data-en="Alignment">Alinhamento</h3>
-              <p
-                class="step-desc"
-                data-pt="Conversa rápida e briefing para entender a essência da marca, identidade visual e objetivo da campanha."
-                data-en="Quick briefing call or chat to align on your brand's visual identity, tone, and campaign goals."
-              >Conversa rápida e briefing para entender a essência da marca, identidade visual e objetivo da campanha.</p>
+        <div class="testimonials-grid">
+          <!-- Balão 1: Estilo iOS / WhatsApp de aprovação de primeira -->
+          <figure class="testimonial-card dm-card is-featured reveal">
+            <div class="dm-card-top">
+              <span class="dm-platform-pill">WhatsApp · Campanha Beleza</span>
+              <span class="dm-check" aria-hidden="true">✓✓</span>
             </div>
-          </li>
+            <blockquote class="dm-bubble">
+              <p
+                data-pt="“Amamos demais o vídeo! Ficou super natural, exatamente na estética da marca e sem aquela cara de propaganda engessada. Aprovado de primeira!”"
+                data-en="“We loved the video so much! It feels super natural, spot-on with our brand aesthetic and zero stiff ad energy. Approved on the first cut!”"
+              >“Amamos demais o vídeo! Ficou super natural, exatamente na estética da marca e sem aquela cara de propaganda engessada. Aprovado de primeira!”</p>
+            </blockquote>
+            <div class="dm-reaction-chip" aria-hidden="true">❤️ <span>aprovado sem alterações</span></div>
+            <figcaption class="testimonial-author">
+              <span class="testimonial-avatar" aria-hidden="true">M</span>
+              <span class="testimonial-who">
+                <span class="testimonial-name" data-pt="Time de Marketing" data-en="Marketing Team">Time de Marketing</span>
+                <span class="testimonial-role" data-pt="Marca parceira · Beleza &amp; Autocuidado" data-en="Partner brand · Beauty &amp; Self-care">Marca parceira · Beleza &amp; Autocuidado</span>
+              </span>
+            </figcaption>
+          </figure>
 
-          <li class="step-card step-tone-2 reveal" data-delay="80">
-            <span class="step-num">02</span>
-            <div class="step-bottom">
-              <h3 class="step-title" data-pt="Roteiro" data-en="Script">Roteiro</h3>
-              <p
-                class="step-desc"
-                data-pt="Nada é gravado sem o seu ok: envio o roteiro completo embasado em Psicologia do Consumidor para aprovação prévia."
-                data-en="Nothing is filmed without your approval: full script grounded in Consumer Psychology sent beforehand."
-              >Nada é gravado sem o seu ok: envio o roteiro completo embasado em Psicologia do Consumidor para aprovação prévia.</p>
+          <!-- Balão 2: Estilo Instagram DM sobre roteiro & retenção -->
+          <figure class="testimonial-card dm-card reveal" data-delay="80">
+            <div class="dm-card-top">
+              <span class="dm-platform-pill">Instagram DM · Tech &amp; Apps</span>
+              <span class="dm-check" aria-hidden="true">♡</span>
             </div>
-          </li>
+            <blockquote class="dm-bubble">
+              <p
+                data-pt="“O gancho dos 3 primeiros segundos prendeu muito! Subimos o criativo no tráfego pago e já virou um dos nossos melhores vídeos em retenção e cliques.”"
+                data-en="“That 3-second hook grabbed attention right away! We launched it in paid ads and it's already one of our top creatives for retention and CTR.”"
+              >“O gancho dos 3 primeiros segundos prendeu muito! Subimos o criativo no tráfego pago e já virou um dos nossos melhores vídeos em retenção e cliques.”</p>
+            </blockquote>
+            <div class="dm-reaction-chip" aria-hidden="true">🔥 <span>alta retenção em Ads</span></div>
+            <figcaption class="testimonial-author">
+              <span class="testimonial-avatar" aria-hidden="true">G</span>
+              <span class="testimonial-who">
+                <span class="testimonial-name" data-pt="Gestão de Performance" data-en="Growth &amp; Paid Social">Gestão de Performance</span>
+                <span class="testimonial-role" data-pt="Parceria · App &amp; Rotina Digital" data-en="Partner · App &amp; Digital Routine">Parceria · App &amp; Rotina Digital</span>
+              </span>
+            </figcaption>
+          </figure>
 
-          <li class="step-card step-tone-3 reveal" data-delay="160">
-            <span class="step-num">03</span>
-            <div class="step-bottom">
-              <h3 class="step-title" data-pt="Entrega" data-en="Delivery">Entrega</h3>
-              <p
-                class="step-desc"
-                data-pt="Vídeo pronto para postar — editado em alta definição, com legenda e text overlay + 1 revisão inclusa."
-                data-en="Ready-to-post HD video — natively edited with captions and text overlays + 1 revision included."
-              >Vídeo pronto para postar — editado em alta definição, com legenda e text overlay + 1 revisão inclusa.</p>
+          <!-- Balão 3: Organização, prazo e entrega pronta -->
+          <figure class="testimonial-card dm-card reveal" data-delay="160">
+            <div class="dm-card-top">
+              <span class="dm-platform-pill">WhatsApp · Casa &amp; Lifestyle</span>
+              <span class="dm-check" aria-hidden="true">✓✓</span>
             </div>
-          </li>
+            <blockquote class="dm-bubble">
+              <p
+                data-pt="“Que leve trabalhar com você! Roteiro super bem pensado antes de gravar, entrega antes do prazo e edição impecável. Já queremos fechar o próximo lote.”"
+                data-en="“Working with you was effortless! Thoughtful script beforehand, ahead-of-schedule delivery, and spotless editing. Ready to book our next batch.”"
+              >“Que leve trabalhar com você! Roteiro super bem pensado antes de gravar, entrega antes do prazo e edição impecável. Já queremos fechar o próximo lote.”</p>
+            </blockquote>
+            <div class="dm-reaction-chip" aria-hidden="true">✨ <span>parceria recorrente</span></div>
+            <figcaption class="testimonial-author">
+              <span class="testimonial-avatar" aria-hidden="true">A</span>
+              <span class="testimonial-who">
+                <span class="testimonial-name" data-pt="Coordenação de Influência" data-en="Influencer Marketing Lead">Coordenação de Influência</span>
+                <span class="testimonial-role" data-pt="Agência &amp; Marca Parceira" data-en="Agency &amp; Partner Brand">Agência &amp; Marca Parceira</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="section-wave section-wave-bottom" aria-hidden="true">
+        <svg viewBox="0 0 1440 72" preserveAspectRatio="none"><path d="M0,0 L1440,0 L1440,30 C1140,70 820,8 480,46 C240,72 100,34 0,50 Z"/></svg>
+      </div>
+    </section>
 
-          <li class="step-card step-tone-4 reveal" data-delay="240">
-            <span class="step-num">04</span>
-            <div class="step-bottom">
-              <h3 class="step-title" data-pt="Pós-entrega" data-en="Post-delivery">Pós-entrega</h3>
-              <p
-                class="step-desc"
-                data-pt="Acompanhamento próximo e resumo de métricas nos primeiros 7 dias após a publicação do conteúdo."
-                data-en="Dedicated follow-up and performance metrics summary across the first 7 days after posting."
-              >Acompanhamento próximo e resumo de métricas nos primeiros 7 dias após a publicação do conteúdo.</p>
-            </div>
-          </li>
-        </ol>
+    <!-- 6. PROCESSO DE TRABALHO (#processo) — Sticky Interlocking Stack (21st.dev Cards Stack) -->
+    <section class="section process-section" id="processo">
+      <div class="container">
+        <div class="process-dock-layout">
+          <div class="process-sticky-intro reveal">
+            <span class="section-pill" data-pt="Como Funciona · Edição 2026" data-en="Workflow · 2026 Edition">Como Funciona · Edição 2026</span>
+            <h2
+              class="section-title"
+              data-pt="Processo leve, prazos claros e entregas prontas para postar."
+              data-en="Seamless process, clear timelines, and ready-to-post deliverables." data-hl-pt="claros" data-hl-en="clear"
+            >Processo leve, prazos claros e entregas prontas para postar.</h2>
+            <p
+              class="process-intro-sub"
+              data-pt="Role para ver cada etapa se encaixando — do alinhamento ao acompanhamento das métricas."
+              data-en="Scroll to watch each step lock into place — from briefing to 7-day analytics."
+            >Role para ver cada etapa se encaixando — do alinhamento ao acompanhamento das métricas.</p>
+          </div>
+
+          <!-- 4 iOS Squircle Step Cards que empilham suavemente ao rolar -->
+          <ol class="steps-grid" data-dock-stack>
+            <li class="step-card step-tone-1" data-stack-card>
+              <div class="step-top-row">
+                <span class="step-num">01</span>
+                <span class="step-chip" data-pt="Briefing · 24h" data-en="Briefing · 24h">Briefing · 24h</span>
+              </div>
+              <div class="step-bottom">
+                <h3 class="step-title" data-pt="Alinhamento" data-en="Alignment">Alinhamento</h3>
+                <p
+                  class="step-desc"
+                  data-pt="Conversa rápida e briefing para entender a essência da marca, identidade visual e objetivo da campanha."
+                  data-en="Quick briefing call or chat to align on your brand's visual identity, tone, and campaign goals."
+                >Conversa rápida e briefing para entender a essência da marca, identidade visual e objetivo da campanha.</p>
+              </div>
+            </li>
+
+            <li class="step-card step-tone-2" data-stack-card>
+              <div class="step-top-row">
+                <span class="step-num">02</span>
+                <span class="step-chip" data-pt="Aprovação · 48h" data-en="Approval · 48h">Aprovação · 48h</span>
+              </div>
+              <div class="step-bottom">
+                <h3 class="step-title" data-pt="Roteiro" data-en="Script">Roteiro</h3>
+                <p
+                  class="step-desc"
+                  data-pt="Nada é gravado sem o seu ok: envio o roteiro completo embasado em Psicologia do Consumidor para aprovação prévia."
+                  data-en="Nothing is filmed without your approval: full script grounded in Consumer Psychology sent beforehand."
+                >Nada é gravado sem o seu ok: envio o roteiro completo embasado em Psicologia do Consumidor para aprovação prévia.</p>
+              </div>
+            </li>
+
+            <li class="step-card step-tone-3" data-stack-card>
+              <div class="step-top-row">
+                <span class="step-num">03</span>
+                <span class="step-chip" data-pt="Até 7 dias · HD" data-en="Up to 7 days · HD">Até 7 dias · HD</span>
+              </div>
+              <div class="step-bottom">
+                <h3 class="step-title" data-pt="Entrega" data-en="Delivery">Entrega</h3>
+                <p
+                  class="step-desc"
+                  data-pt="Vídeo pronto para postar — editado em alta definição, com legenda e text overlay + 1 revisão inclusa."
+                  data-en="Ready-to-post HD video — natively edited with captions and text overlays + 1 revision included."
+                >Vídeo pronto para postar — editado em alta definição, com legenda e text overlay + 1 revisão inclusa.</p>
+              </div>
+            </li>
+
+            <li class="step-card step-tone-4" data-stack-card>
+              <div class="step-top-row">
+                <span class="step-num">04</span>
+                <span class="step-chip" data-pt="7 dias · Métricas" data-en="7 days · Metrics">7 dias · Métricas</span>
+              </div>
+              <div class="step-bottom">
+                <h3 class="step-title" data-pt="Pós-entrega" data-en="Post-delivery">Pós-entrega</h3>
+                <p
+                  class="step-desc"
+                  data-pt="Acompanhamento próximo e resumo de métricas nos primeiros 7 dias após a publicação do conteúdo."
+                  data-en="Dedicated follow-up and performance metrics summary across the first 7 days after posting."
+                >Acompanhamento próximo e resumo de métricas nos primeiros 7 dias após a publicação do conteúdo.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
 
         <!-- Faixa Pastel de Prazos (SLAs do Canva: 24h / 48h / 7 dias / 1 revisão) -->
         <div class="sla-pastel-strip reveal">
@@ -1877,8 +2175,10 @@
             data-aria-en="Footer quick links"
           >
             <a href="#sobre" data-pt="Sobre" data-en="About">Sobre</a>
+            <a href="#marcas" data-pt="Marcas" data-en="Brands">Marcas</a>
             <a href="#cases" data-pt="Cases" data-en="Cases">Cases</a>
             <a href="#portfolio" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
+            <a href="#depoimentos" data-pt="Depoimentos" data-en="Testimonials">Depoimentos</a>
             <a href="#processo" data-pt="Processo" data-en="Process">Processo</a>
             <a href="#servicos" data-pt="Pacotes" data-en="Packages">Pacotes</a>
           </nav>

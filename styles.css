@@ -3425,3 +3425,2281 @@ main,
   .steps-grid .step-card:nth-child(3) { --stack-i: 2; }
   .steps-grid .step-card:nth-child(4) { --stack-i: 3; }
 }
+
+/* ==========================================================================
+   SISTEMA FLUIDO "iOS CORE" + TÁTIL ORGÂNICO (21st.dev Mechanics)
+   Tipografia: Fraunces (SOFT=100) + Plus Jakarta Sans
+   Paleta 100% preservada: creme, sálvia, areia, terracota, espresso
+   ========================================================================== */
+:root {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  --font-mono: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius-card: 30px;
+  --radius-xl: 40px;
+  --radius-squircle: 26px;
+
+  /* Sombras difusas multi-camada e brilho interno especular estilo iOS */
+  --ios-specular: inset 0 1.5px 1px rgba(255, 255, 255, 0.85), inset 0 -1px 1px rgba(95, 71, 58, 0.05);
+  --ios-shadow:
+    0 2px 6px rgba(95, 71, 58, 0.04),
+    0 18px 40px -16px rgba(95, 71, 58, 0.13),
+    var(--ios-specular);
+  --ios-shadow-lift:
+    0 8px 18px rgba(95, 71, 58, 0.07),
+    0 30px 60px -18px rgba(95, 71, 58, 0.2),
+    var(--ios-specular);
+
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body {
+  position: relative;
+  background-color: var(--bg);
+}
+
+main,
+.closing-monolith-shell {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- 1. Fundo Fluido Aurora Mesh (21st.dev Honey Ember adaptado) ---------- */
+.ios-mesh-bg {
+  position: fixed;
+  inset: -40px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  filter: blur(28px);
+  opacity: 0.9;
+}
+
+.mesh-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  will-change: transform;
+  animation: meshFloat 22s ease-in-out infinite alternate;
+}
+
+.blob-terracotta {
+  width: 54vw;
+  height: 54vw;
+  max-width: 720px;
+  max-height: 720px;
+  top: 12%;
+  right: -14%;
+  background: radial-gradient(circle, rgba(167, 109, 97, 0.28) 0%, rgba(245, 232, 229, 0.55) 58%, transparent 76%);
+}
+
+.blob-sage {
+  width: 58vw;
+  height: 58vw;
+  max-width: 760px;
+  max-height: 760px;
+  top: 38%;
+  left: -18%;
+  background: radial-gradient(circle, rgba(154, 160, 134, 0.32) 0%, rgba(234, 237, 227, 0.6) 56%, transparent 76%);
+  animation-duration: 27s;
+  animation-delay: -6s;
+}
+
+.blob-sand {
+  width: 50vw;
+  height: 50vw;
+  max-width: 680px;
+  max-height: 680px;
+  bottom: 8%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(191, 160, 122, 0.3) 0%, rgba(244, 237, 226, 0.6) 58%, transparent 78%);
+  animation-duration: 25s;
+  animation-delay: -12s;
+}
+
+.blob-blush {
+  width: 44vw;
+  height: 44vw;
+  max-width: 580px;
+  max-height: 580px;
+  top: 68%;
+  left: 22%;
+  background: radial-gradient(circle, rgba(243, 230, 226, 0.72) 0%, transparent 72%);
+  animation-duration: 30s;
+}
+
+@keyframes meshFloat {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3%, -4%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-3%, 3%, 0) scale(0.96);
+  }
+}
+
+/* ---------- 2. Tipografia Orgânica + Palavra- Pílula (estilo referência 1) ---------- */
+.section-title,
+.contact-title {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.pillar-title,
+.step-title,
+.service-card-title,
+.overlap-stat-big,
+.dark-stat-num,
+.sla-time,
+.case-kpi-trio strong,
+.hero-kpi-strip .hero-kpi-num {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 100;
+  font-weight: 500;
+}
+
+/* Destaque estilo pílula macia inclinada (como na referência Lauren Mktg) */
+.hl-word {
+  display: inline-block;
+  font-style: italic;
+  color: var(--espresso);
+  padding: 0.02em 0.34em 0.08em;
+  margin-inline: 0.04em;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f5e8e5 0%, #eaede3 100%);
+  border: 1px solid rgba(167, 109, 97, 0.26);
+  box-shadow: 0 6px 16px -8px rgba(167, 109, 97, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transform: rotate(-1.4deg);
+}
+
+.hl-word::before {
+  display: none;
+}
+
+/* Pílulas de seção estilo vidro iOS */
+.section-pill {
+  padding: 7px 18px;
+  border-radius: 999px;
+  background: rgba(255, 251, 245, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 22px -10px rgba(95, 71, 58, 0.16), inset 0 1px 0 #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  color: var(--terracotta);
+}
+
+/* ---------- 3. iOS Dynamic Frosted Dock Navbar (21st.dev 3D Frosted Glass Dock) ---------- */
+.limelight-navbar {
+  background: linear-gradient(180deg, rgba(255, 251, 245, 0.72) 0%, rgba(255, 251, 245, 0.88) 100%);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 18px 42px -16px rgba(95, 71, 58, 0.2),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 2px rgba(154, 160, 134, 0.2);
+  transition: transform 0.35s var(--ease-ios), background-color 0.3s ease, box-shadow 0.35s ease;
+}
+
+.site-header.is-scrolled .limelight-navbar {
+  background: linear-gradient(180deg, rgba(255, 251, 245, 0.84) 0%, rgba(255, 251, 245, 0.95) 100%);
+  border-color: rgba(255, 255, 255, 0.92);
+}
+
+.brand-wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+}
+
+.nav-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: background-color 0.25s var(--ease-ios), color 0.25s ease, transform 0.25s var(--ease-ios);
+}
+
+.nav-link.is-active {
+  background-color: rgba(234, 237, 227, 0.92);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 4px 10px -6px rgba(95, 71, 58, 0.18);
+}
+
+@media (min-width: 980px) {
+  .nav-link {
+    padding: 6px 11px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 980px) and (max-width: 1159.98px) {
+  .nav-cta-desktop {
+    display: none;
+  }
+}
+
+/* ---------- 4. Hero com encaixe arredondado estilo cartão iOS ao rolar ---------- */
+.hero-section {
+  border-bottom-left-radius: clamp(28px, 4vw, 52px);
+  border-bottom-right-radius: clamp(28px, 4vw, 52px);
+  box-shadow: 0 28px 60px -26px rgba(95, 71, 58, 0.32);
+  transform-origin: center top;
+  will-change: transform, border-radius;
+}
+
+/* Fita fluida contínua (inspirada na faixa laranja/rosa da referência 1, em terracota/areia) */
+.fluid-ribbon {
+  position: relative;
+  z-index: 3;
+  margin-top: -22px;
+  margin-inline: clamp(12px, 3vw, 42px);
+  padding-block: 13px;
+  border-radius: 999px;
+  background: linear-gradient(95deg, var(--terracotta) 0%, #b68072 48%, var(--sage-dark) 100%);
+  color: var(--surface);
+  overflow: hidden;
+  box-shadow:
+    0 16px 34px -14px rgba(95, 71, 58, 0.32),
+    inset 0 1px 1px rgba(255, 255, 255, 0.38);
+  transform: rotate(-0.6deg);
+}
+
+.fluid-ribbon-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeSlide 32s linear infinite;
+}
+
+.fluid-ribbon-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-right: 24px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.ribbon-dot {
+  font-style: normal;
+  font-size: 0.76rem;
+  opacity: 0.78;
+  color: #f4ede2;
+}
+
+.brands-marquee-section {
+  padding-top: 44px;
+  border-bottom: none;
+}
+
+/* ---------- 5. Quem Sou Eu: foto estilo polaroid macia + cards iOS squircle ---------- */
+.about-portrait-wrap {
+  padding: 10px;
+  border-radius: 36px;
+  background: rgba(255, 251, 245, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--ios-shadow-lift);
+  transform: rotate(-1.4deg);
+  transition: transform 0.55s var(--ease-spring);
+}
+
+.about-portrait-wrap img {
+  border-radius: 28px;
+}
+
+.about-photo-col:hover .about-portrait-wrap {
+  transform: rotate(0deg) scale(1.01);
+}
+
+.about-overlap-card {
+  border-radius: 26px;
+  background: rgba(255, 251, 245, 0.86);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--ios-shadow-lift);
+}
+
+.quick-badge {
+  background: rgba(255, 251, 245, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 6px 18px -10px rgba(95, 71, 58, 0.16), inset 0 1px 0 #ffffff;
+  font-weight: 600;
+}
+
+.about-canva-note {
+  border-radius: 26px;
+  background: linear-gradient(135deg, rgba(234, 237, 227, 0.88), rgba(255, 251, 245, 0.86));
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  box-shadow: var(--ios-shadow);
+}
+
+.pillar-card {
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  box-shadow: var(--ios-shadow);
+  transition: transform 0.45s var(--ease-spring), box-shadow 0.45s ease;
+}
+
+.pillar-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+  background: rgba(255, 251, 245, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 14px -8px rgba(95, 71, 58, 0.2);
+  font-style: normal;
+  font-size: 0.98rem;
+  color: var(--espresso);
+}
+
+.dark-stats-band {
+  border-radius: 38px;
+  background: linear-gradient(135deg, rgba(234, 237, 227, 0.9) 0%, rgba(255, 251, 245, 0.92) 50%, rgba(245, 232, 229, 0.9) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--ios-shadow-lift);
+}
+
+/* ---------- 6. Marcas em Destaque (#marcas): Ondas Fluidas + Polaroids Inclinadas ---------- */
+.brands-section {
+  position: relative;
+  padding-block: 112px;
+  background: linear-gradient(180deg, #f3ece2 0%, #eaede3 52%, #f5e8e5 100%);
+  overflow: hidden;
+}
+
+.section-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 56px;
+  line-height: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.section-wave svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.section-wave-top {
+  top: -1px;
+  transform: scaleY(-1);
+}
+
+.section-wave-top path {
+  fill: var(--bg);
+}
+
+.section-wave-bottom {
+  bottom: -1px;
+  transform: scaleY(-1);
+}
+
+.section-wave-bottom path {
+  fill: var(--bg);
+}
+
+.brands-header-wrap {
+  position: relative;
+  margin-bottom: 48px;
+}
+
+.brands-header-wrap .section-head-centered {
+  margin-bottom: 0;
+}
+
+/* Selo adesivo girado estilo referência 1 ("Female-founded" / sticker) */
+.brands-sticker-badge {
+  display: none;
+}
+
+@media (min-width: 980px) {
+  .brands-sticker-badge {
+    position: absolute;
+    right: 24px;
+    top: 6px;
+    width: 122px;
+    height: 122px;
+    border-radius: 50%;
+    background: var(--espresso);
+    color: var(--surface);
+    border: 2px dashed rgba(255, 251, 245, 0.55);
+    box-shadow: 0 18px 36px -12px rgba(95, 71, 58, 0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: rotate(9deg);
+    transition: transform 0.45s var(--ease-spring);
+  }
+
+  .brands-header-wrap:hover .brands-sticker-badge {
+    transform: rotate(-3deg) scale(1.06);
+  }
+
+  .sticker-big {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.85rem;
+    line-height: 1;
+    color: #f4ede2;
+  }
+
+  .sticker-sub {
+    margin-top: 3px;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.88;
+  }
+}
+
+/* Grid de Cards Polaroid iOS (inspirado no Photo Deck 21st.dev + referências 1 e 2) */
+.brands-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 14px;
+}
+
+.brand-feature {
+  padding: 10px 10px 16px;
+  border-radius: 28px;
+  background: rgba(255, 251, 245, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow: var(--ios-shadow);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: transform 0.5s var(--ease-spring), box-shadow 0.5s ease;
+}
+
+.brand-feature:first-child {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 980px) {
+  .brand-feature:nth-child(2) { transform: rotate(-1.3deg); }
+  .brand-feature:nth-child(3) { transform: rotate(1.2deg); }
+  .brand-feature:nth-child(4) { transform: rotate(1.1deg); }
+  .brand-feature:nth-child(5) { transform: rotate(-1.2deg); }
+  .brand-feature:nth-child(6) { transform: rotate(-1.1deg); }
+  .brand-feature:nth-child(7) { transform: rotate(1.3deg); }
+  .brand-feature:nth-child(8) { transform: rotate(-1deg); }
+  .brand-feature:nth-child(9) { transform: rotate(1.1deg); }
+}
+
+.brand-feature:hover {
+  transform: translateY(-7px) rotate(0deg) scale(1.015);
+  box-shadow: var(--ios-shadow-lift);
+  z-index: 4;
+}
+
+.brand-photo-btn,
+.brand-type-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: var(--tone-sand);
+  cursor: zoom-in;
+}
+
+.brand-photo-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease-spring);
+}
+
+.brand-feature:hover .brand-photo-btn img {
+  transform: scale(1.05);
+}
+
+.brand-index {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 251, 245, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--espresso);
+}
+
+.brand-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.brand-type-sage {
+  background: linear-gradient(145deg, #eaede3 0%, #dfe5d5 100%);
+}
+
+.brand-type-rose {
+  background: linear-gradient(145deg, #f5e8e5 0%, #f3dcd6 100%);
+}
+
+.brand-type-logo {
+  width: 56%;
+  max-width: 140px;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+.brand-type-word {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.55rem, 2.8vw, 2.1rem);
+  color: var(--espresso);
+}
+
+.brand-type-note {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 251, 245, 0.78);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--espresso);
+}
+
+.brand-feature-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 6px 0;
+}
+
+.brand-feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.brand-feature-name {
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--espresso);
+}
+
+.brand-feature-cat {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--espresso-muted);
+}
+
+.brand-feature-logo {
+  height: 28px;
+  width: auto;
+  max-width: 70px;
+  object-fit: contain;
+  flex-shrink: 0;
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) contrast(1.12) sepia(26%) hue-rotate(338deg);
+  opacity: 0.72;
+}
+
+.brand-feature-logo.logo-wide-pad { height: 36px; }
+.brand-feature-logo.logo-tight { height: 20px; }
+.brand-feature-logo.logo-knockout {
+  height: 36px;
+  filter: grayscale(100%) invert(1) contrast(3.2) sepia(28%) hue-rotate(338deg);
+}
+
+.brand-feature:first-child .brand-feature-name {
+  font-size: 1.38rem;
+}
+
+.brands-more {
+  margin-top: 34px;
+  padding: 22px 28px;
+  border-radius: 999px;
+  background: rgba(255, 251, 245, 0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow: var(--ios-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+@media (max-width: 767.98px) {
+  .brands-more {
+    border-radius: 28px;
+  }
+}
+
+.brands-more p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 0.95rem;
+  color: var(--espresso-soft);
+}
+
+.brands-more-num {
+  display: inline-flex;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--tone-terracotta);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--terracotta);
+}
+
+.link-underline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--espresso);
+  color: var(--surface);
+  font-size: 0.84rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: transform 0.3s var(--ease-spring), background-color 0.25s ease;
+}
+
+.link-underline:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: var(--terracotta);
+}
+
+@media (min-width: 640px) {
+  .brands-feature-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px 18px;
+  }
+}
+
+@media (min-width: 980px) {
+  .brands-feature-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 26px 22px;
+  }
+
+  .brand-feature:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 14px 14px 20px;
+    border-radius: 34px;
+  }
+
+  .brand-feature:first-child .brand-photo-btn {
+    flex: 1;
+    aspect-ratio: auto;
+    min-height: 440px;
+    border-radius: 24px;
+  }
+
+  .brands-more {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .brands-more p {
+    justify-content: flex-start;
+  }
+}
+
+/* ---------- 7. Cases & Portfólio: Vidro iOS + Container Scroll Perspective ---------- */
+.case-card {
+  border-radius: 34px;
+  background: rgba(255, 251, 245, 0.86);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--ios-shadow);
+}
+
+.case-card:hover {
+  box-shadow: var(--ios-shadow-lift);
+}
+
+[data-scroll-stage] {
+  perspective: 1200px;
+}
+
+[data-scroll-stage] .videos-panel {
+  transform:
+    translate3d(0, calc((1 - var(--stage-p, 1)) * 26px), 0)
+    scale(calc(0.965 + var(--stage-p, 1) * 0.035))
+    rotateX(calc((1 - var(--stage-p, 1)) * 5deg));
+  transform-origin: center top;
+  transition: transform 0.18s linear;
+  will-change: transform;
+}
+
+.niche-tablist {
+  background: rgba(255, 251, 245, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--ios-shadow);
+}
+
+.video-frame {
+  border-radius: 26px;
+  box-shadow: var(--ios-shadow);
+}
+
+/* ---------- 8. Depoimentos (#depoimentos): Balões iOS / Glass Cards ---------- */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.testimonial-card {
+  position: relative;
+  padding: 30px 28px 26px;
+  border-radius: 34px;
+  background: rgba(255, 251, 245, 0.86);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow: var(--ios-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 26px;
+  color: var(--espresso);
+  transition: transform 0.45s var(--ease-spring), box-shadow 0.45s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ios-shadow-lift);
+}
+
+.testimonial-card.is-featured {
+  background: linear-gradient(145deg, #f5e8e5 0%, #fffbf5 55%, #eaede3 100%);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--ios-shadow-lift);
+}
+
+.testimonial-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  background: rgba(255, 251, 245, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 18px -10px rgba(95, 71, 58, 0.22);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 2.1rem;
+  line-height: 0.6;
+  padding-top: 12px;
+  color: var(--terracotta);
+}
+
+.testimonial-quote p {
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  line-height: 1.58;
+  color: var(--espresso);
+  text-wrap: pretty;
+}
+
+.testimonial-card.is-featured .testimonial-quote p {
+  font-size: clamp(1.16rem, 1.8vw, 1.34rem);
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(95, 71, 58, 0.09);
+}
+
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--tone-sage), var(--tone-sand));
+  border: 2px solid #ffffff;
+  box-shadow: 0 6px 14px -6px rgba(95, 71, 58, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--espresso);
+  flex-shrink: 0;
+}
+
+.testimonial-who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonial-name {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--espresso);
+}
+
+.testimonial-role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--espresso-muted);
+}
+
+@media (max-width: 979.98px) {
+  .testimonials-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    margin-inline: -18px;
+    padding-inline: 18px;
+    padding-block: 8px 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .testimonials-grid::-webkit-scrollbar { display: none; }
+
+  .testimonial-card {
+    flex: 0 0 min(84vw, 370px);
+    scroll-snap-align: center;
+  }
+
+  .js-ready .testimonials-grid .testimonial-card.reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@media (min-width: 980px) {
+  .testimonials-grid {
+    grid-template-columns: 1.25fr 1fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+}
+
+/* ---------- 9. Processo (#processo): Sticky Interlocking Stack (21st.dev Cards Stack) ---------- */
+.process-section {
+  overflow-x: visible;
+}
+
+main {
+  overflow-x: clip;
+}
+
+.process-dock-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+.process-sticky-intro .section-pill {
+  margin-bottom: 16px;
+}
+
+.process-intro-sub {
+  margin-top: 16px;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--espresso-soft);
+  max-width: 40ch;
+}
+
+.step-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.step-chip {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 251, 245, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--espresso);
+}
+
+.steps-grid[data-dock-stack] {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.steps-grid[data-dock-stack] .step-card {
+  position: sticky;
+  top: calc(var(--header-h) + 18px + var(--stack-index, 0) * 18px);
+  min-height: 230px;
+  border-radius: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  box-shadow:
+    0 -10px 30px -14px rgba(95, 71, 58, 0.16),
+    var(--ios-shadow-lift);
+  transform: scale(var(--dock-scale, 1));
+  transform-origin: center top;
+  transition: transform 0.16s linear, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.steps-grid[data-dock-stack] .step-card:nth-child(1) { --stack-index: 0; }
+.steps-grid[data-dock-stack] .step-card:nth-child(2) { --stack-index: 1; }
+.steps-grid[data-dock-stack] .step-card:nth-child(3) { --stack-index: 2; }
+.steps-grid[data-dock-stack] .step-card:nth-child(4) { --stack-index: 3; }
+
+@media (min-width: 980px) {
+  .process-dock-layout {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .process-sticky-intro {
+    position: sticky;
+    top: calc(var(--header-h) + 36px);
+  }
+
+  .steps-grid[data-dock-stack] .step-card {
+    top: calc(var(--header-h) + 28px + var(--stack-index, 0) * 22px);
+    padding: 32px 34px;
+  }
+}
+
+.sla-pastel-strip {
+  margin-top: 38px;
+  border-radius: 32px;
+  background: rgba(255, 251, 245, 0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow: var(--ios-shadow);
+}
+
+/* ---------- 10. Pacotes (#servicos) — Blocos vibrantes estilo referência 2 nas cores pastel ---------- */
+.service-pastel-card {
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  box-shadow: var(--ios-shadow);
+}
+
+.service-pastel-card:hover {
+  box-shadow: var(--ios-shadow-lift);
+}
+
+.bundle-box {
+  border-radius: 22px;
+  background: rgba(255, 251, 245, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 20px -12px rgba(95, 71, 58, 0.16);
+}
+
+/* ---------- 11. Cards que "encaixam" ao rolar (Scroll-Driven Dock Scale/Tilt) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .ios-scroll-fit {
+    transform:
+      translate3d(0, calc((1 - var(--fit-p, 1)) * 22px), 0)
+      scale(calc(0.96 + var(--fit-p, 1) * 0.04));
+    opacity: calc(0.55 + var(--fit-p, 1) * 0.45);
+    transition: transform 0.14s linear, opacity 0.14s linear, box-shadow 0.35s ease;
+    will-change: transform, opacity;
+  }
+}
+
+.closing-monolith {
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  box-shadow: var(--ios-shadow-lift);
+}
+
+.glass-channel-card {
+  border-radius: 24px;
+  background: rgba(255, 251, 245, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--ios-shadow);
+}
+
+
+/* ==========================================================================
+   CAMADA AUTORAL & SCRAPBOOK iOS (Pós-Auditoria Localhost)
+   Adesivos, fita washi, notas manuscritas Caveat + setas curvas, widgets iOS,
+   balões de DM/WhatsApp, polaroids em camadas e correção dos bugs visuais.
+   ========================================================================== */
+:root {
+  --font-hand: "Caveat", cursive;
+}
+
+/* 1. Correção da logo Beleza Brasileira (sem caixa branca chapada) */
+.marquee-logo.logo-knockout,
+.brand-feature-logo.logo-knockout {
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) invert(1) contrast(4.5) brightness(1.08);
+  border-radius: 6px;
+}
+
+/* 2. Contraste alto na pílula do Hero + Widgets de Notificação iOS */
+.hero-section .pill-eyebrow {
+  background: rgba(78, 57, 46, 0.56);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 251, 245, 0.42);
+  box-shadow: 0 8px 24px -8px rgba(40, 26, 18, 0.4);
+  color: #fffbf5;
+}
+
+.hero-ios-widgets {
+  display: none;
+}
+
+@media (min-width: 1040px) {
+  .hero-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .hero-ios-widgets {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 286px;
+    flex-shrink: 0;
+    margin-bottom: 6px;
+  }
+
+  .ios-notif-card {
+    position: relative;
+    padding: 14px 16px;
+    border-radius: 22px;
+    background: rgba(255, 251, 245, 0.82);
+    backdrop-filter: blur(22px) saturate(170%);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    box-shadow:
+      0 18px 38px -12px rgba(45, 30, 22, 0.36),
+      inset 0 1.5px 1px rgba(255, 255, 255, 0.92);
+    color: var(--espresso);
+    animation: iosFloat 6s ease-in-out infinite alternate;
+  }
+
+  .ios-notif-top {
+    transform: rotate(-2.2deg);
+  }
+
+  .ios-notif-bottom {
+    transform: rotate(1.8deg) translateX(-14px);
+    animation-delay: -3s;
+  }
+
+  .ios-notif-app {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--tone-terracotta);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--terracotta);
+  }
+
+  .ios-notif-bottom .ios-notif-app {
+    background: var(--tone-sage);
+    color: var(--sage-dark);
+  }
+
+  .ios-notif-time {
+    float: right;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--espresso-muted);
+  }
+
+  .ios-notif-title {
+    margin-top: 7px;
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--espresso);
+  }
+
+  .ios-notif-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.73rem;
+    color: var(--espresso-soft);
+  }
+}
+
+@keyframes iosFloat {
+  from { margin-top: 0; }
+  to { margin-top: -6px; }
+}
+
+/* 3. Scrapbook no Quem Sou Eu: nota manuscrita + seta curva + fita washi + 2ª polaroid */
+.about-photo-col {
+  padding-top: 28px;
+  padding-bottom: 34px;
+}
+
+.about-hand-note {
+  position: relative;
+  z-index: 4;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 4px;
+  margin-left: 10px;
+  margin-bottom: -8px;
+  color: var(--terracotta);
+  transform: rotate(-3.5deg);
+}
+
+.about-hand-note span {
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.hand-arrow-svg {
+  width: 56px;
+  height: 36px;
+  color: var(--terracotta);
+  flex-shrink: 0;
+  transform: translateY(10px);
+}
+
+.washi-tape {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  z-index: 5;
+  width: 112px;
+  height: 26px;
+  transform: translateX(-50%) rotate(-3deg);
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(234, 237, 227, 0.92), rgba(211, 220, 198, 0.88));
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 4px 10px -4px rgba(95, 71, 58, 0.22);
+}
+
+.about-portrait-wrap {
+  position: relative;
+  overflow: visible;
+}
+
+.about-portrait-wrap img {
+  width: 100%;
+  aspect-ratio: 4 / 4.7;
+  object-fit: cover;
+  object-position: center top;
+  overflow: hidden;
+}
+
+.about-mini-polaroid {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .about-mini-polaroid {
+    display: block;
+    position: absolute;
+    right: -14px;
+    top: 46%;
+    z-index: 4;
+    width: 148px;
+    padding: 8px 8px 12px;
+    border-radius: 18px;
+    background: #fffbf5;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 20px 40px -14px rgba(95, 71, 58, 0.28);
+    transform: rotate(6.5deg);
+    transition: transform 0.45s var(--ease-spring);
+  }
+
+  .about-mini-polaroid img {
+    width: 100%;
+    aspect-ratio: 1 / 1.05;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .about-mini-polaroid figcaption {
+    margin-top: 6px;
+    text-align: center;
+    font-family: var(--font-hand);
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--espresso-soft);
+  }
+
+  .about-photo-col:hover .about-mini-polaroid {
+    transform: rotate(2deg) translateY(-4px);
+  }
+}
+
+/* 4. Cartões 01/02/03 com fita adesiva no topo e etiqueta manuscrita */
+.pillars-scrapbook-head {
+  margin-top: 46px;
+  margin-bottom: -28px;
+  text-align: center;
+}
+
+.hand-kicker {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--terracotta);
+  transform: rotate(-2deg);
+}
+
+.pillar-card {
+  position: relative;
+  padding-top: 30px;
+}
+
+@media (min-width: 980px) {
+  .pillar-card:nth-child(1) { transform: rotate(-1.2deg); }
+  .pillar-card:nth-child(2) { transform: translateY(10px) rotate(0.8deg); }
+  .pillar-card:nth-child(3) { transform: rotate(-0.9deg); }
+
+  .pillar-card:hover {
+    transform: translateY(-6px) rotate(0deg);
+  }
+}
+
+.card-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 84px;
+  height: 22px;
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 4px;
+  background: rgba(255, 251, 245, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 10px -5px rgba(95, 71, 58, 0.2);
+}
+
+.pillar-card:nth-child(2) .card-tape {
+  transform: translateX(-50%) rotate(2.5deg);
+}
+
+.pillar-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pillar-hand-tag {
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--terracotta);
+}
+
+.pillar-tone-sage .pillar-hand-tag {
+  color: var(--sage-dark);
+}
+
+/* 5. Faixa DNA em Espresso Quente + Polaroid (quebra a monotonia do creme e não repete métricas) */
+.creator-dna-band {
+  margin-top: 48px;
+  padding: 34px 28px;
+  border-radius: 38px;
+  background: linear-gradient(135deg, var(--espresso) 0%, #725546 60%, #8b6355 100%);
+  color: var(--surface);
+  box-shadow: 0 26px 54px -22px rgba(95, 71, 58, 0.38);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.dna-hand {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: 1.55rem;
+  color: #f3dcd6;
+  transform: rotate(-1.5deg);
+}
+
+.dna-title {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 100;
+  font-size: clamp(1.4rem, 2.6vw, 1.95rem);
+  font-weight: 500;
+  line-height: 1.22;
+  color: #fffbf5;
+  max-width: 34ch;
+}
+
+.dna-pills {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.dna-pills span {
+  padding: 8px 15px;
+  border-radius: 999px;
+  background: rgba(255, 251, 245, 0.14);
+  border: 1px solid rgba(255, 251, 245, 0.28);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fffbf5;
+}
+
+.dna-pills span:last-child {
+  background: #f5e8e5;
+  border-color: #ffffff;
+  color: var(--espresso);
+}
+
+.dna-polaroid {
+  justify-self: center;
+  width: min(230px, 72vw);
+  padding: 9px 9px 22px;
+  border-radius: 24px;
+  background: #fffbf5;
+  box-shadow: 0 20px 44px -14px rgba(30, 18, 12, 0.45);
+  transform: rotate(3.2deg);
+  transition: transform 0.45s var(--ease-spring);
+}
+
+.dna-polaroid:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.dna-polaroid img {
+  width: 100%;
+  aspect-ratio: 4 / 4.5;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+@media (min-width: 900px) {
+  .creator-dna-band {
+    grid-template-columns: 1fr auto;
+    padding: 42px 48px;
+    gap: 40px;
+  }
+}
+
+/* 6. Seção Depoimentos (#depoimentos): bloco colorido Rosé/Sálvia com Ondas + Balões de DM/WhatsApp */
+.testimonials-section {
+  position: relative;
+  padding-block: 112px;
+  background: linear-gradient(165deg, #f5e8e5 0%, #f4ede2 52%, #eaede3 100%);
+  overflow: hidden;
+}
+
+.testimonials-head-row {
+  position: relative;
+  margin-bottom: 44px;
+}
+
+.testimonials-head-row .section-head-centered {
+  margin-bottom: 0;
+}
+
+.dm-hand-note {
+  display: block;
+  margin-top: 8px;
+  text-align: center;
+  font-family: var(--font-hand);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--terracotta);
+  transform: rotate(-2deg);
+}
+
+.dm-card {
+  gap: 16px;
+  padding: 24px 24px 22px;
+}
+
+@media (min-width: 980px) {
+  .dm-card:nth-child(1) { transform: rotate(-1.1deg); }
+  .dm-card:nth-child(2) { transform: translateY(12px) rotate(1deg); }
+  .dm-card:nth-child(3) { transform: rotate(-0.9deg); }
+
+  .dm-card:hover {
+    transform: translateY(-6px) rotate(0deg);
+  }
+}
+
+.dm-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dm-platform-pill {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--tone-sage);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--espresso);
+}
+
+.dm-card:nth-child(2) .dm-platform-pill {
+  background: var(--tone-terracotta);
+  color: var(--terracotta);
+}
+
+.dm-check {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--sage-dark);
+}
+
+.dm-bubble {
+  position: relative;
+  padding: 18px 20px;
+  border-radius: 22px 22px 22px 6px;
+  background: #ffffff;
+  border: 1px solid rgba(95, 71, 58, 0.08);
+  box-shadow: 0 10px 24px -14px rgba(95, 71, 58, 0.2);
+}
+
+.dm-bubble p {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.58;
+  color: var(--espresso);
+}
+
+.dm-card.is-featured .dm-bubble p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dm-reaction-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  margin-top: -6px;
+  margin-left: 12px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: #fffbf5;
+  border: 1px solid rgba(167, 109, 97, 0.22);
+  box-shadow: 0 6px 14px -6px rgba(95, 71, 58, 0.22);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--espresso);
+  position: relative;
+  z-index: 2;
+}
+
+/* 7. Revelação instantânea ao rolar rápido (evita tela vazia esperando observer) */
+.js-ready .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: none;
+  transition:
+    opacity 0.45s var(--ease-spring),
+    transform 0.45s var(--ease-spring);
+}
+
+
+/* ==========================================================================
+   LOGOS DAS MARCAS MAIORES E MAIS NÍTIDAS NA FAIXA DE DESTAQUE
+   ========================================================================== */
+.brands-marquee-section {
+  padding-block: 48px 28px;
+}
+
+.marquee-band {
+  padding-block: 18px;
+}
+
+.marquee-group {
+  gap: 58px;
+  padding-right: 58px;
+}
+
+.marquee-logo-item {
+  height: 76px;
+}
+
+.marquee-logo {
+  height: 62px;
+  max-width: 190px;
+  opacity: 0.78;
+}
+
+.marquee-logo.logo-wide-pad {
+  height: 78px;
+  max-width: 210px;
+}
+
+.marquee-logo.logo-tight {
+  height: 46px;
+}
+
+.marquee-logo.logo-knockout {
+  height: 76px;
+  max-width: 200px;
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) invert(1) contrast(1.85) brightness(1.22) sepia(20%) hue-rotate(338deg);
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .marquee-group {
+    gap: 86px;
+    padding-right: 86px;
+  }
+
+  .marquee-logo-item {
+    height: 98px;
+  }
+
+  .marquee-logo {
+    height: 80px;
+    max-width: 230px;
+  }
+
+  .marquee-logo.logo-wide-pad {
+    height: 102px;
+    max-width: 250px;
+  }
+
+  .marquee-logo.logo-knockout {
+    height: 96px;
+    max-width: 240px;
+  }
+
+  .marquee-logo.logo-tight {
+    height: 58px;
+  }
+}
+
+
+/* ==========================================================================
+   ELIAS AUTHOR HERO (@clevision/elias-author-hero) — ADAPTADO PARA SARAH VERÇOSA
+   Paleta preservada: creme #f9f7f2, areia #f2ece1, terracota #a76d61, espresso #4e392e
+   ========================================================================== */
+.hero-section.ea-hero {
+  position: relative;
+  min-height: 100svh;
+  display: block;
+  padding-top: calc(var(--header-h) + 14px);
+  padding-bottom: 40px;
+  background:
+    radial-gradient(ellipse 65% 55% at 76% 24%, rgba(234, 237, 227, 0.7) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 22% 80%, rgba(245, 232, 229, 0.65) 0%, transparent 72%),
+    var(--bg);
+  color: var(--espresso);
+  overflow: clip;
+  container-type: inline-size;
+}
+
+.ea-container {
+  width: min(100% - 32px, 1380px);
+  margin-inline: auto;
+}
+
+.ea-canvas {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
+}
+
+.ea-canvas > * {
+  min-width: 0;
+}
+
+/* ---------- Z-0: Nome Gigante em 2 Linhas + Spotlight Outline ---------- */
+.ea-giant-name {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow: hidden;
+  font-family: "Syne", var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  user-select: none;
+  pointer-events: none;
+  transform: translate3d(var(--ea-px-name, 0px), var(--ea-py-name, 0px), 0);
+  transition: transform 0.25s ease-out;
+}
+
+.ea-line {
+  position: relative;
+  display: block;
+  white-space: nowrap;
+}
+
+.ea-line-first {
+  font-size: clamp(2.65rem, 17cqw, 14.8rem);
+  color: var(--terracotta);
+  text-align: left;
+}
+
+.ea-line-last {
+  font-size: clamp(2.05rem, 11.4cqw, 11.1rem);
+  color: var(--espresso-deep);
+  text-align: right;
+  margin-top: 0.03em;
+}
+
+.ea-fill {
+  display: block;
+}
+
+.ea-outline {
+  position: absolute;
+  inset: 0;
+  color: var(--bg);
+  -webkit-text-stroke: 2px var(--terracotta);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ea-line-last .ea-outline {
+  -webkit-text-stroke: 2px var(--espresso-deep);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ea-hero.has-spot .ea-outline {
+    opacity: 1;
+    -webkit-mask-image: radial-gradient(
+      circle 150px at var(--spot-x, -999px) var(--spot-y, -999px),
+      #000 0%,
+      #000 55%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle 150px at var(--spot-x, -999px) var(--spot-y, -999px),
+      #000 0%,
+      #000 55%,
+      transparent 100%
+    );
+  }
+}
+
+/* ---------- Z-2: Retrato Recortado Transparente sobrepondo as letras ---------- */
+.ea-figure {
+  position: relative;
+  z-index: 2;
+  margin: -54px auto 0;
+  width: min(370px, 84cqw);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  transform: translate3d(var(--ea-px-fig, 0px), var(--ea-py-fig, 0px), 0);
+  transition: transform 0.22s ease-out;
+}
+
+.ea-figure-arch {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 82%;
+  height: 70%;
+  border-radius: 999px 999px 28px 28px;
+  background: linear-gradient(180deg, #efe8dc 0%, #e7dfd1 100%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  z-index: 0;
+}
+
+.ea-cutout-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 22px 34px rgba(62, 43, 33, 0.22));
+}
+
+/* ---------- Z-3 (Esquerda Inferior): Intro Editorial + Botão c/ Disco + Redes ---------- */
+.ea-intro {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ea-lead {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 100;
+  font-size: clamp(1.32rem, 2.1cqw, 1.72rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--espresso-deep);
+}
+
+.ea-accent-rule {
+  display: block;
+  width: 54px;
+  height: 2.5px;
+  border-radius: 99px;
+  background-color: var(--terracotta);
+}
+
+.ea-desc {
+  font-size: 0.94rem;
+  line-height: 1.58;
+  color: var(--espresso-soft);
+  max-width: 34ch;
+}
+
+.ea-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.ea-btn-primary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 5px 6px 5px 20px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid rgba(95, 71, 58, 0.2);
+  box-shadow: var(--ios-shadow);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--espresso-deep);
+  transition: transform 0.3s var(--ease-spring), color 0.3s ease, border-color 0.3s ease;
+}
+
+.ea-btn-disc {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  color: #fffbf5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: transform 0.35s var(--ease-spring), background-color 0.3s ease;
+}
+
+.ea-btn-primary:hover {
+  transform: translateY(-2px);
+  border-color: var(--terracotta);
+}
+
+.ea-btn-primary:hover .ea-btn-disc {
+  transform: rotate(45deg) scale(1.06);
+  background: var(--espresso-deep);
+}
+
+.ea-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding-inline: 18px;
+  border-radius: 999px;
+  background: rgba(234, 237, 227, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--espresso);
+  transition: transform 0.25s var(--ease-spring), background-color 0.25s ease;
+}
+
+.ea-btn-ghost:hover {
+  transform: translateY(-2px);
+  background: var(--pastel-sage-btn);
+}
+
+.ea-socials {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--espresso-muted);
+}
+
+.ea-socials a {
+  position: relative;
+  color: var(--espresso);
+  padding-bottom: 2px;
+}
+
+.ea-socials a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--terracotta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.ea-socials a:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Z-1 (Direita Superior): Showcase Card 3D Interativo ---------- */
+.ea-showcase-card {
+  position: relative;
+  z-index: 3;
+  padding: 16px 18px;
+  border-radius: 26px;
+  background: linear-gradient(145deg, #efe9df 0%, #f7f2ea 100%);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow: var(--ios-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.4s var(--ease-spring), box-shadow 0.4s ease;
+}
+
+.ea-showcase-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ios-shadow-lift);
+}
+
+.ea-deck-stage {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  perspective: 800px;
+}
+
+.ea-deck-3d {
+  position: relative;
+  width: 82px;
+  height: 108px;
+  flex-shrink: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(6deg) rotateY(-18deg) rotateZ(-2deg);
+  transition: transform 0.6s var(--ease-spring);
+}
+
+.ea-showcase-card:hover .ea-deck-3d {
+  transform: rotateX(2deg) rotateY(-6deg) rotateZ(0deg) scale(1.04);
+}
+
+.ea-deck-3d.is-flipping {
+  transform: rotateY(162deg) scale(0.95);
+}
+
+.ea-deck-back {
+  position: absolute;
+  inset: 4px -6px -4px 6px;
+  border-radius: 14px;
+  background: var(--tone-terracotta);
+  border: 2px solid #ffffff;
+  box-shadow: 0 10px 20px -10px rgba(78, 57, 46, 0.35);
+}
+
+.ea-deck-front {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  padding: 4px;
+  background: #fffbf5;
+  box-shadow: 0 14px 26px -10px rgba(78, 57, 46, 0.38);
+  overflow: hidden;
+}
+
+.ea-deck-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.ea-deck-pill {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(78, 57, 46, 0.78);
+  backdrop-filter: blur(6px);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fffbf5;
+}
+
+.ea-showcase-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ea-showcase-kicker {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.ea-showcase-title {
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--espresso-deep);
+}
+
+.ea-showcase-tags {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--espresso-muted);
+}
+
+.ea-showcase-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fffbf5;
+  border: 1px solid rgba(95, 71, 58, 0.14);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--espresso);
+  transition: transform 0.28s var(--ease-spring), background-color 0.25s ease;
+}
+
+.ea-showcase-arrow:hover {
+  transform: rotate(45deg);
+  background: var(--pastel-sage-btn);
+}
+
+/* ---------- Z-1 (Direita Inferior): Bloco de Nota Datilografada + Carimbo ---------- */
+.ea-pad {
+  position: relative;
+  z-index: 3;
+  padding: 20px 22px 18px;
+  border-radius: 22px;
+  background: #fffdf9;
+  border: 1px solid rgba(95, 71, 58, 0.1);
+  box-shadow:
+    0 20px 44px -18px rgba(78, 57, 46, 0.2),
+    inset 0 1px 0 #ffffff;
+  transform: rotate(-1.2deg);
+  transition: transform 0.4s var(--ease-spring);
+}
+
+.ea-pad:hover {
+  transform: rotate(0deg);
+}
+
+.ea-pad-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ea-pad-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--espresso-muted);
+}
+
+.ea-stamp {
+  width: 64px;
+  height: 64px;
+  margin-top: -8px;
+  border-radius: 50%;
+  border: 1.8px dashed var(--terracotta);
+  background: rgba(245, 232, 229, 0.55);
+  color: var(--terracotta);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.52rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  transform: rotate(12deg);
+  transition: transform 0.25s var(--ease-spring), background-color 0.25s ease;
+}
+
+.ea-stamp span:first-child {
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.ea-stamp:hover,
+.ea-stamp.is-pressed {
+  transform: rotate(0deg) scale(0.94);
+  background: var(--tone-terracotta);
+}
+
+.ea-pad-greeting {
+  margin-top: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--terracotta);
+}
+
+.ea-pad-typewriter {
+  margin-top: 8px;
+  min-height: 3.3em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--espresso-deep);
+}
+
+.ea-caret {
+  display: inline-block;
+  width: 7px;
+  height: 1.05em;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  background: var(--terracotta);
+  animation: eaBlink 0.95s steps(1) infinite;
+}
+
+@keyframes eaBlink {
+  50% { opacity: 0; }
+}
+
+.ea-pad-foot {
+  margin-top: 14px;
+  padding-top: 11px;
+  border-top: 1px dashed rgba(95, 71, 58, 0.16);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--espresso-muted);
+}
+
+.ea-pad-kpis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--espresso-soft);
+}
+
+.ea-pad-kpis strong {
+  color: var(--espresso-deep);
+}
+
+.ea-pad-counter {
+  letter-spacing: 0.1em;
+}
+
+/* ---------- Composição Tablet (640px–1023px) ---------- */
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  .ea-canvas {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .ea-giant-name,
+  .ea-figure,
+  .ea-pad {
+    grid-column: 1 / -1;
+  }
+
+  .ea-figure {
+    margin-top: -78px;
+    width: min(410px, 66cqw);
+  }
+}
+
+/* ---------- Composição Desktop Completa (>=1024px — Elias Author Stage) ---------- */
+@media (min-width: 1024px) {
+  .hero-section.ea-hero {
+    min-height: 100svh;
+    padding-top: calc(var(--header-h) + 18px);
+    padding-bottom: 0;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .ea-container {
+    width: min(100% - 64px, 1400px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .ea-canvas {
+    position: relative;
+    flex: 1;
+    min-height: clamp(610px, calc(100svh - 104px), 820px);
+    display: block;
+  }
+
+  /* Z-0: Nome gigante ocupando toda a largura no topo */
+  .ea-giant-name {
+    position: relative;
+    z-index: 0;
+    padding-top: 4px;
+    overflow: visible;
+  }
+
+  .ea-line-first {
+    font-size: clamp(6.8rem, 15.2cqw, 13.4rem);
+  }
+
+  .ea-line-last {
+    font-size: clamp(5rem, 10.6cqw, 9.6rem);
+  }
+
+  /* Z-2: Retrato recortado da Sarah saindo da base e cruzando SARAH / VERÇOSA */
+  .ea-figure {
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 24%;
+    margin: 0;
+    width: clamp(360px, 31cqw, 465px);
+  }
+
+  .ea-figure-arch {
+    width: 78%;
+    height: 58%;
+    background: linear-gradient(180deg, rgba(239, 232, 220, 0.88) 0%, rgba(231, 223, 209, 0.95) 100%);
+  }
+
+  /* Z-3 (Canto inferior esquerdo): Intro + Botões + Redes */
+  .ea-intro {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    bottom: 34px;
+    width: clamp(250px, 22.5cqw, 315px);
+  }
+
+  /* Z-3 (Direita superior, acima de VERÇOSA): Showcase Card 3D */
+  .ea-showcase-card {
+    position: absolute;
+    z-index: 3;
+    top: 10px;
+    right: 0;
+    width: clamp(320px, 28cqw, 390px);
+  }
+
+  /* Z-3 (Direita inferior, abaixo de VERÇOSA): Bloco de Nota Datilografada */
+  .ea-pad {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 30px;
+    width: clamp(360px, 34cqw, 470px);
+  }
+}
